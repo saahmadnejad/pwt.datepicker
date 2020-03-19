@@ -194,6 +194,22 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-xs-12 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Persian Inline With Custom Weekdays</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input id="custom_weekdays_inline_alt" class="form-control" disabled/>
+                                <br/>
+                                <div id="custom_weekdays_inline" data-date="2025/3/12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -300,7 +316,7 @@
         // --------------------------------------------
         $("#inline").persianDatepicker({
             initialValueType: 'persian',
-            minDate: 1506550581778,            
+            minDate: 1506550581778,
             calendar: {
                 persian: {
                     enabled: true,
@@ -367,6 +383,18 @@
             inline: true,
             viewMode: 'day',
             format: "lll",
+            customWeekdays:{
+                mode: 'extended',
+                list: [
+                  "😀",
+                  "😄",
+                  "😁",
+                  "😆",
+                  "😅",
+                  "🤣",
+                  "😂",
+                ]
+            },
             navigator: {
                 scroll: {
                     enabled: true
@@ -383,6 +411,39 @@
                 meridian: {
                     enabled: true
                 }
+            },
+        });
+
+        $("#custom_weekdays_inline").persianDatepicker({
+            calendar: {
+                persian: {
+                    enabled: true,
+                    locale: 'fa',
+                    showHint: true,
+                    leapYearMode: "astronomical" // "astronomical"
+                },
+                gregorian: {
+                    enabled: false,
+                    showHint: true,
+                    locale: 'en'
+                }
+            },
+            altField: '#custom_weekdays_inline_alt',
+            altFormat: 'LLLL',
+            inline: true,
+            viewMode: 'day',
+            format: "lll",
+            customWeekdays:{
+                mode: 'custom',
+                list: [
+                    "😀",
+                    "😄",
+                    "😁",
+                    "😆",
+                    "😅",
+                    "🤣",
+                    "😂",
+                ]
             },
         });
     });

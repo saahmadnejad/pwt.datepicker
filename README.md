@@ -179,6 +179,9 @@ bower install persian-datepicker
 | observer                       | boolean          | false                                           | If true datepicker update self by user inputted date string, accept 'yyyy/mm/dd' |
 | inputDelay                     | int              | 800  (millisecond)                              | Time for last user key-down event, accept millisecond |
 | template                       | string           | null                                            | By default datepicker have a template string, and you can overwrite it simply by replace string in config. |
+| customWeekdays                 | object           |                                                 |  |
+| customWeekdays.mode            | string           | "min", "extended", "custom"                     |  |
+| customWeekdays.list            | array            | ['😃', '😄', '😁', '😆', '😅', '🤣', '😂']       | If customWeekdays.mode == "custom", then you can see your Custom Weekdays list in calendar  |
 
 ## license
 Freely distributable under the terms of the [MIT](https://opensource.org/licenses/MIT) license. 

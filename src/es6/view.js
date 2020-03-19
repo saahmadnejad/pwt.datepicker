@@ -442,9 +442,28 @@ class View {
      * @private
      */
     _getWeekViewModel () {
+        let weekdaysList = [];
+        if (this.model.options !== null && this.model.options.customWeekdays !== undefined){
+            let weekdays = this.model.options.customWeekdays;
+            switch (weekdays.mode) {
+                case 'custom':
+                    weekdaysList = weekdays.list;
+                    break;
+                case 'extended':
+                    weekdaysList = this.model.PersianDate.date().rangeName().weekdays;
+                    break;
+                case 'min':
+                default:
+                    weekdaysList = this.model.PersianDate.date().rangeName().weekdaysMin;
+            }
+
+        }else{
+            weekdaysList = this.model.PersianDate.date().rangeName().weekdaysMin;
+        }
+
         return {
             enabled: true,
-            list: this.model.PersianDate.date().rangeName().weekdaysMin
+            list: weekdaysList
         };
     }
 
