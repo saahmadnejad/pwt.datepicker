@@ -506,6 +506,10 @@ class View {
             year: this._getYearViewModel(data),
             toolbox: this.model.options.toolbox,
             cssClass: this.getCssClass(),
+            theme: {
+                enabled: (this.model.options.theme !== undefined),
+                values: this.model.options.theme
+            },
             onlyTimePicker: this.model.options.onlyTimePicker,
             altCalendarShowHint: this.model.options.calendar[anotherCalendar[0]].showHint,
             calendarSwitchText: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format(this.model.options.toolbox.calendarSwitch.format),

@@ -2,6 +2,41 @@
  * @type {string}
  */
 const Template = `
+{{#theme.enabled}}
+<script type="text/javascript">
+  $(document).ready(function(){
+      let borderWidth = {{theme.values.dayCell.hover.borderWidth}};
+      $('.datepicker-plot-area .datepicker-day-view .table-days td span').css('height', $('.datepicker-plot-area .datepicker-day-view .table-days td span').width() + 'px');
+      $('.datepicker-plot-area .datepicker-day-view .table-days td span').css('line-height', $('.datepicker-plot-area .datepicker-day-view .table-days td span').width() + 'px');
+      $('.datepicker-plot-area .datepicker-day-view .table-days td span').css('border-radius', '50%');
+  })
+</script>
+<style>
+.datepicker-plot-area .datepicker-day-view .table-days td .alter-calendar-day{
+  color: {{theme.values.dayCell.hover.fontColor}};
+}
+.datepicker-plot-area .datepicker-day-view .table-days td{
+  font-size: {{theme.values.dayCell.fontSize}};
+  font-weight: {{theme.values.dayCell.fontWeight}};
+  padding: 4px;
+}
+.datepicker-plot-area .datepicker-day-view .table-days td span:hover, .datepicker-plot-area .datepicker-day-view .table-days td.selected span{
+  background-color: {{theme.values.dayCell.hover.backgroundColor}};
+  border: {{theme.values.dayCell.hover.borderWidth}}px {{theme.values.dayCell.hover.borderStyle}} {{theme.values.dayCell.hover.borderColor}};
+  color: {{theme.values.dayCell.hover.fontColor}};
+  text-shadow: none;
+}
+.datepicker-plot-area .datepicker-day-view .table-days td span {
+  border: {{theme.values.dayCell.hover.borderWidth}}px solid {{theme.values.dayCell.backgroundColor}};
+}
+.datepicker-plot-area .datepicker-day-view .table-days td span.other-month{
+  color: {{theme.values.dayCell.disableFontColor}};
+}
+.datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row-cell{
+  color: {{theme.values.weekday.fontColor}}
+}
+</style>
+{{/theme.enabled}}
 <div id="plotId" class="datepicker-plot-area {{cssClass}}">
     {{#navigator.enabled}}
         <div data-navigator class="datepicker-navigator">

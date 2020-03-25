@@ -1,218 +1,218 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Persian Datepicker</title>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Persian Datepicker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="HandheldFriendly" content="true"/>
-    <!-- Demo Bootstrap Style -->
-    <!-- ------------------------------------------------------------------------------------ -->
-    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="HandheldFriendly" content="true"/>
+  <!-- Demo Bootstrap Style -->
+  <!-- ------------------------------------------------------------------------------------ -->
+  <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 
-    <!-- Demo Font Embed -->
-    <!-- ------------------------------------------------------------------------------------ -->
-    <link href="../assets/css/fontiran.css" rel="stylesheet"/>
+  <!-- Demo Font Embed -->
+  <!-- ------------------------------------------------------------------------------------ -->
+  <link href="../assets/css/fontiran.css" rel="stylesheet"/>
 
-    <!-- Persian Datepicker Style -->
-    <!-- ------------------------------------------------------------------------------------ -->
-    <link id="datepickerTheme" href="./css/persian-datepicker.css" rel="stylesheet"/>
+  <!-- Persian Datepicker Style -->
+  <!-- ------------------------------------------------------------------------------------ -->
+  <link id="datepickerTheme" href="./css/m-persian-datepicker.css" rel="stylesheet"/>
 
-    <!-- Theme Switcher -->
-    <!-- ------------------------------------------------------------------------------------ -->
-    <script type="text/javascript">
-        function swapStyleSheet(sheet) {
-            document.getElementById('datepickerTheme').setAttribute('href', sheet);
-        }
-    </script>
+  <!-- Theme Switcher -->
+  <!-- ------------------------------------------------------------------------------------ -->
+  <script type="text/javascript">
+      function swapStyleSheet(sheet) {
+          document.getElementById('datepickerTheme').setAttribute('href', sheet);
+      }
+  </script>
 
-    <!-- Demo Style -->
-    <!-- ------------------------------------------------------------------------------------ -->
-    <style type="text/css">
-        *,
-        body {
-            font-family: IRANSans, tahoma;
-        }
+  <!-- Demo Style -->
+  <!-- ------------------------------------------------------------------------------------ -->
+  <style type="text/css">
+    *,
+    body {
+      font-family: IRANSans, tahoma;
+    }
 
-        body {
-            padding-bottom: 300px;
-        }
+    body {
+      padding-bottom: 300px;
+    }
 
-        .input-group-addon {
-            cursor: pointer;
-        }
+    .input-group-addon {
+      cursor: pointer;
+    }
 
-        .navbar-right {
-            padding: 10px;
-        }
-    </style>
+    .navbar-right {
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
 
 <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                Persian Date Picker <span class="badge">Version 1.1.3</span>
-            </a>
-        </div>
-        <nav class="navbar-right">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        Persian Date Picker <span class="badge">Version 1.1.3</span>
+      </a>
+    </div>
+    <nav class="navbar-right">
             <span>
             theme:
                 </span>
-            <button class="btn btn-xs btn-primary"
-                    onclick="swapStyleSheet('css/persian-datepicker.css')">
-                Default
-            </button>
-            <button class="btn btn-xs btn-primary"
-                    onclick="swapStyleSheet('css/theme/persian-datepicker-blue.min.css')">
-                Blue
-            </button>
-            <button class="btn btn-xs btn-primary"
-                    onclick="swapStyleSheet('css/theme/persian-datepicker-cheerup.min.css')">
-                Cheerup
-            </button>
-            <button class="btn btn-xs btn-primary"
-                    onclick="swapStyleSheet('css/theme/persian-datepicker-dark.min.css')">
-                Dark
-            </button>
-            <button class="btn btn-xs btn-primary"
-                    onclick="swapStyleSheet('css/theme/persian-datepicker-redblack.min.css')">
-                Redblack
-            </button>
-        </nav><!--/.nav-collapse -->
-    </div>
+      <button class="btn btn-xs btn-primary"
+              onclick="swapStyleSheet('css/persian-datepicker.css')">
+        Default
+      </button>
+      <button class="btn btn-xs btn-primary"
+              onclick="swapStyleSheet('css/theme/persian-datepicker-blue.min.css')">
+        Blue
+      </button>
+      <button class="btn btn-xs btn-primary"
+              onclick="swapStyleSheet('css/theme/persian-datepicker-cheerup.min.css')">
+        Cheerup
+      </button>
+      <button class="btn btn-xs btn-primary"
+              onclick="swapStyleSheet('css/theme/persian-datepicker-dark.min.css')">
+        Dark
+      </button>
+      <button class="btn btn-xs btn-primary"
+              onclick="swapStyleSheet('css/theme/persian-datepicker-redblack.min.css')">
+        Redblack
+      </button>
+    </nav><!--/.nav-collapse -->
+  </div>
 </nav>
 
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-xs-12 col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Persian Inline Sample </h3>
-                            <span>algorithmic Leap Year, with 'en' locale</span>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <input id="inlineAlt" class="form-control" disabled/>
-                                <br/>
-                                <div id="inline">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Persian Inline Sample </h3>
+              <span>algorithmic Leap Year, with 'en' locale</span>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <input id="inlineAlt" class="form-control" disabled/>
+                <br/>
+                <div id="inline">
                 </div>
-                <div class="col-xs-12 col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Persian Inline Sample</h3>
-                            <span>astronomical Leap Year</span>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <input id="inlineAlt2" class="form-control" disabled/>
-                                <br/>
-                                <div id="inline2" data-date="2025/3/12">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Persian Inline Sample</h3>
+              <span>astronomical Leap Year</span>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <input id="inlineAlt2" class="form-control" disabled/>
+                <br/>
+                <div id="inline2" data-date="2025/3/12">
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                <div class="col-xs-12 col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Gregorian Inline Sample</h3>
-                            <span>Gregorian Date</span>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <input id="inlineAltGregorian" class="form-control" disabled/>
-                                <br/>
-                                <div id="inlineGregorian" data-date="2025/3/12">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-xs-12 col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Gregorian Inline Sample</h3>
+              <span>Gregorian Date</span>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <input id="inlineAltGregorian" class="form-control" disabled/>
+                <br/>
+                <div id="inlineGregorian" data-date="2025/3/12">
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                <div class="col-xs-12 col-md-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Only Timepicker with initial value</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <input class="form-control" id="timePicker" value="11:23:23"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-xs-12 col-md-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Only Timepicker with initial value</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <input class="form-control" id="timePicker" value="11:23:23"/>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                <div class="col-xs-12 col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Input Sample without intial value observer true</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <input id="normalAlt" class="form-control" disabled/>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" id="normal"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-xs-12 col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Input Sample without intial value observer true</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <input id="normalAlt" class="form-control" disabled/>
+              </div>
+              <div class="form-group">
+                <input class="form-control" id="normal"/>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
-                <div class="col-xs-12 col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Iconic Sample</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <input id="inputGroupAlt" type="text" class="form-control" placeholder="Alt Field"
-                                       disabled>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
+        <div class="col-xs-12 col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Iconic Sample</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <input id="inputGroupAlt" type="text" class="form-control" placeholder="Alt Field"
+                       disabled>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
                                     <span id="inputGroup" class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
-                                    <input id="inputGroupAlt2" type="text" class="form-control" placeholder="Alt Field">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  <input id="inputGroupAlt2" type="text" class="form-control" placeholder="Alt Field">
                 </div>
-
-                <div class="col-xs-12 col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Persian Inline With Custom Weekdays</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <input id="custom_weekdays_inline_alt" class="form-control" disabled/>
-                                <br/>
-                                <div id="custom_weekdays_inline" data-date="2025/3/12">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
+
+        <div class="col-xs-12 col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Persian Inline With Custom Weekdays</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <input id="custom_weekdays_inline_alt" class="form-control" disabled/>
+                <br/>
+                <div id="custom_weekdays_inline" data-date="2025/3/12">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Jquery (required dependency) -->
@@ -229,7 +229,7 @@
 <!-- Datepicker main script -->
 <!-- ------------------------------------------------------------------------------------ -->
 <!--<script src="./js/persian-datepicker.js"></script>-->
-<script src="./js/persian-datepicker.js"></script>
+<script src="./js/m-persian-datepicker.js"></script>
 
 <!-- Init datepicker -->
 <!-- ------------------------------------------------------------------------------------ -->
@@ -383,18 +383,6 @@
             inline: true,
             viewMode: 'day',
             format: "lll",
-            customWeekdays:{
-                mode: 'extended',
-                list: [
-                  "😀",
-                  "😄",
-                  "😁",
-                  "😆",
-                  "😅",
-                  "🤣",
-                  "😂",
-                ]
-            },
             navigator: {
                 scroll: {
                     enabled: true
@@ -421,11 +409,6 @@
                     locale: 'fa',
                     showHint: true,
                     leapYearMode: "astronomical" // "astronomical"
-                },
-                gregorian: {
-                    enabled: false,
-                    showHint: true,
-                    locale: 'en'
                 }
             },
             altField: '#custom_weekdays_inline_alt',
@@ -434,16 +417,28 @@
             viewMode: 'day',
             format: "lll",
             customWeekdays:{
-                mode: 'custom',
-                list: [
-                    "😀",
-                    "😄",
-                    "😁",
-                    "😆",
-                    "😅",
-                    "🤣",
-                    "😂",
-                ]
+                mode: 'extended',
+            },
+            theme: {
+                dayCell: {
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    backgroundColor: 'white',
+                    fontColor: '#1c1b19',
+                    disableFontColor: '#74909b',
+                    shape: 'circle', // circle, cube, rectangle
+                    hover: {
+                        fontColor: '#1c1b19',
+                        borderWidth: '1',
+                        borderStyle: 'solid',
+                        backgroundColor: '#c8e6ff',
+                        borderColor: '#1373eb',
+                        fontWeight: 'bold',
+                    },
+                },
+                weekday: {
+                    fontColor: '#3e4f59',
+                },
             },
         });
     });
