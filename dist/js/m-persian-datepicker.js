@@ -1,3 +1,10 @@
+/*
+** m-persian-datepicker - v1.3.1
+** Reza Babakhani <babakhani.reza@gmail.com>, Seyed Ali Ahmadnejad <sa.ahmadnejad@gmail.com>
+** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
+** Under MIT license 
+*/ 
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
