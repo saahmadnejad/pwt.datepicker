@@ -10,13 +10,11 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 
 > Note: from v1.0.0 persianDatepicker support gregorian calendar
 
-[![npm version](https://badge.fury.io/js/persian-datepicker.svg)](https://badge.fury.io/js/persian-datepicker)
-[![Bower version](https://badge.fury.io/bo/persian-datepicker.svg)](https://badge.fury.io/bo/persian-datepicker)
-[![Travis-ci](https://travis-ci.org/babakhani/pwt.datepicker.svg?branch=master)](https://badge.fury.io/bo/persian-datepicker)
+[![npm version](https://badge.fury.io/js/m-persian-datepicker.svg)](https://badge.fury.io/js/m-persian-datepicker.svg)
 
-<a class="github-button" href="https://github.com/babakhani/pwt.datepicker" data-icon="octicon-star" data-style="mega" data-count-href="/babakhani/pwt.datepicker/stargazers" data-count-api="/repos/babakhani/pwt.datepicker#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star babakhani/pwt.datepicker on GitHub">Star</a>
-<a class="github-button" href="https://github.com/babakhani/pwt.datepicker/issues" data-icon="octicon-issue-opened" data-style="mega" data-count-api="/repos/babakhani/pwt.datepicker#open_issues_count" data-count-aria-label="# issues on GitHub" aria-label="Issue babakhani/pwt.datepicker on GitHub">Issue</a>
-<a class="github-button" href="https://github.com/babakhani/pwt.datepicker/fork" data-icon="octicon-repo-forked" data-style="mega" data-count-href="/babakhani/pwt.datepicker/network" data-count-api="/repos/babakhani/pwt.datepicker#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork babakhani/pwt.datepicker on GitHub">Fork</a>
+<a class="github-button" href="https://github.com/saahmadnejad/pwt.datepicker" data-icon="octicon-star" data-style="mega" data-count-href="/babakhani/pwt.datepicker/stargazers" data-count-api="/repos/babakhani/pwt.datepicker#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star babakhani/pwt.datepicker on GitHub">Star</a>
+<a class="github-button" href="https://github.com/saahmadnejad/pwt.datepicker/issues" data-icon="octicon-issue-opened" data-style="mega" data-count-api="/repos/babakhani/pwt.datepicker#open_issues_count" data-count-aria-label="# issues on GitHub" aria-label="Issue babakhani/pwt.datepicker on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/saahmadnejad/pwt.datepicker/fork" data-icon="octicon-repo-forked" data-style="mega" data-count-href="/babakhani/pwt.datepicker/network" data-count-api="/repos/babakhani/pwt.datepicker#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork babakhani/pwt.datepicker on GitHub">Fork</a>
 
 
 - [Documents](http://babakhani.github.io/PersianWebToolkit/doc/datepicker)
@@ -36,8 +34,8 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 ## CDN
 
 - persian-date.js [uncompressed](https://unpkg.com/persian-date@latest/dist/persian-date.js) | [minified](https://unpkg.com/persian-date@latest/dist/persian-date.min.js)
-- persian-datepicker.js [uncompressed](https://unpkg.com/persian-datepicker@latest/dist/js/persian-datepicker.js) | [minified](https://unpkg.com/persian-datepicker@latest/dist/js/persian-datepicker.min.js)
-- persian-datepicker.css [uncompressed](https://unpkg.com/persian-datepicker@latest/dist/css/persian-datepicker.css) | [minified](https://unpkg.com/persian-datepicker@latest/dist/css/persian-datepicker.min.css)
+- persian-datepicker.js [uncompressed](https://unpkg.com/m-persian-datepicker@latest/dist/js/m-persian-datepicker.js) | [minified](https://unpkg.com/m-persian-datepicker@latest/dist/js/m-persian-datepicker.min.js)
+- persian-datepicker.css [uncompressed](https://unpkg.com/m-persian-datepicker@latest/dist/css/m-persian-datepicker.css) | [minified](https://unpkg.com/m-persian-datepicker@latest/dist/css/m-persian-datepicker.min.css)
 
 
 ## Dependency
@@ -45,24 +43,24 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 - [persian date](https://github.com/babakhani/PersianDate)
 - [jquery](http://jquery.com/)
 
-> persian-datepicker 1.x.x need persian-date 1.x.x
+> m-persian-datepicker 1.x.x need persian-date 1.x.x
 
 ## Install
 
 ```bash
-npm install persian-datepicker
+npm install m-persian-datepicker
 
-bower install persian-datepicker
+npm i m-persian-datepicker
 ```
 
 ## Usage
 
 ```html
 <head>
-  <link rel="stylesheet" href="css/persian.datepicker.css"/>
+  <link rel="stylesheet" href="css/m-persian-datepicker.css"/>
   <script src="js/jquery.js"></script>
   <script src="js/persian.date.js"></script>
-  <script src="js/persian.datepicker.js"></script>
+  <script src="js/m-persian-datepicker.js"></script>
 </head>
 
 <script type="text/javascript">
