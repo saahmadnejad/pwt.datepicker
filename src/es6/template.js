@@ -20,10 +20,16 @@ const Template = `
   font-weight: {{theme.values.dayCell.fontWeight}};
   padding: 4px;
 }
-.datepicker-plot-area .datepicker-day-view .table-days td span:hover, .datepicker-plot-area .datepicker-day-view .table-days td.selected span{
+.datepicker-plot-area .datepicker-day-view .table-days td span:hover{
   background-color: {{theme.values.dayCell.hover.backgroundColor}};
   border: {{theme.values.dayCell.hover.borderWidth}}px {{theme.values.dayCell.hover.borderStyle}} {{theme.values.dayCell.hover.borderColor}};
   color: {{theme.values.dayCell.hover.fontColor}};
+  text-shadow: none;
+}
+.datepicker-plot-area .datepicker-day-view .table-days td.selected span{
+  background-color: {{theme.values.dayCell.selected.backgroundColor}};
+  border: {{theme.values.dayCell.selected.borderWidth}}px {{theme.values.dayCell.selected.borderStyle}} {{theme.values.dayCell.selected.borderColor}};
+  color: {{theme.values.dayCell.selected.fontColor}};
   text-shadow: none;
 }
 .datepicker-plot-area .datepicker-day-view .table-days td span {

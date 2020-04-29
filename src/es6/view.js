@@ -370,15 +370,44 @@ class View {
         };
     }
 
-    markSelectedDay () {
-        const selected = this.model.state.selected;
-        this.$container.find('.table-days td').each(function () {
-            if ($(this).data('date') == [selected.year, selected.month, selected.date].join(',')) {
-                $(this).addClass('selected');
+    markSelectedDay (unixDate = -1) {
+        console.log('unixDate');
+        console.log(unixDate);
+        console.log('this.$container');
+        console.log(this.$container);
+        console.log('this.$container.find("td[data-unix^=\'"+unixDate+"\']")');
+        console.log(this.$container.find("td[data-unix^='"+unixDate+"']"));
+        console.log($("td[data-unix^='"+unixDate+"']"));
+        if (this.model.options.multiSelect && unixDate !== -1) {
+            let td = this.$container.find("td[data-unix^='"+unixDate+"']");
+
+            if (this.isInSelectedDays(unixDate)) {
+                $(td[0]).removeClass('selected');
             } else {
-                $(this).removeClass('selected');
+                $(td[0]).addClass('selected');
+            }
+        } else {
+            const selected = this.model.state.selected;
+            this.$container.find('.table-days td').each(function () {
+                if ($(this).data('date') == [selected.year, selected.month, selected.date].join(',')) {
+                    $(this).addClass('selected');
+                } else {
+                    $(this).removeClass('selected');
+                }
+            });
+        }
+    }
+
+    isInSelectedDays (value) {
+        const selected = this.model.state.selectedInMultiSelectMode;
+        let found = false;
+        selected.forEach(function (obj, index) {
+            if (found)  return true;
+            if (obj.unixDate === value) {
+                found = true;
             }
         });
+        return found;
     }
 
     markToday () {
@@ -456,7 +485,6 @@ class View {
                 default:
                     weekdaysList = this.model.PersianDate.date().rangeName().weekdaysMin;
             }
-
         }else{
             weekdaysList = this.model.PersianDate.date().rangeName().weekdaysMin;
         }
@@ -510,6 +538,7 @@ class View {
                 enabled: (this.model.options.theme !== undefined),
                 values: this.model.options.theme
             },
+            multiSelect: ((this.model.options.multiSelect !== undefined) && (this.model.options.multiSelect === true)),
             onlyTimePicker: this.model.options.onlyTimePicker,
             altCalendarShowHint: this.model.options.calendar[anotherCalendar[0]].showHint,
             calendarSwitchText: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format(this.model.options.toolbox.calendarSwitch.format),

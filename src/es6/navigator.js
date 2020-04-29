@@ -133,29 +133,48 @@ class Navigator {
     _attachEvents() {
         let that = this;
 
-        if (this.model.options.navigator.enabled) {
-            /**
-             * @description navigator click event
-             */
-            $(document).on('click', '#' + that.model.view.id + ' .pwt-btn', function () {
-                if ($(this).is('.pwt-btn-next')) {
-                    that.model.state.navigate('next');
-                    that.model.view.render();
-                    that.model.options.navigator.onNext(that.model);
+        /**
+         * @description check if dayPicker enabled attach Events
+         */
+        if (this.model.options.dayPicker.enabled) {
+
+            $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td:not(.disabled)', function () {
+                let selected = $(this).hasClass('selected');
+
+                let thisUnix = $(this).data('unix');
+
+                //TODO must be checked
+                that.model.state.setViewDateTime('unix', that.model.state.selected.unixDate);
+
+                if (that.model.options.autoClose) {
+                    that.model.view.hide();
+                    that.model.options.onHide(that);
                 }
-                else if ($(this).is('.pwt-btn-switch')) {
-                    that.model.state.switchViewMode();
+
+                console.log('that._mustRerender()');
+                console.log(that._mustRerender());
+
+                if (that._mustRerender()) {
                     that.model.view.render();
-                    that.model.options.navigator.onSwitch(that.model);
+                } else {
+                    console.log('XXXXXXXXXXXXX');
+                    console.log(thisUnix);
+                    console.log('XXXXXXXXXXXXX');
+                    that.model.view.markSelectedDay(thisUnix);
                 }
-                else if ($(this).is('.pwt-btn-prev')) {
-                    that.model.state.navigate('prev');
-                    that.model.view.render();
-                    that.model.options.navigator.onPrev(that.model);
+
+                if (that.model.options.multiSelect) {
+                    if (selected) {
+                        that.model.state.removeSelectedDateTimeFromMultiSelectMode('unix', thisUnix);
+                    } else {
+                        that.model.state.setSelectedDateTimeInMultiSelectMode('unix', thisUnix);
+                    }
                 }
+
+                that.model.options.dayPicker.onSelect(thisUnix);
+                that.model.options.onSelect(thisUnix);
             });
         }
-
 
         /**
          * @description check if timePicker enabled attach Events
@@ -182,38 +201,28 @@ class Navigator {
 
         }
 
-
-        /**
-         * @description check if dayPicker enabled attach Events
-         */
-        if (this.model.options.dayPicker.enabled) {
-
+        if (this.model.options.navigator.enabled) {
             /**
-             * @description days click event
+             * @description navigator click event
              */
-            $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td:not(.disabled)', function () {
-                let thisUnix = $(this).data('unix'), mustRender;
-                that.model.state.setSelectedDateTime('unix', thisUnix);
-                if (that.model.state.selected.month !== that.model.state.view.month) {
-                    mustRender = true;
-                } else {
-                    mustRender = false;
-                }
-                that.model.state.setViewDateTime('unix', that.model.state.selected.unixDate);
-                if (that.model.options.autoClose) {
-                    that.model.view.hide();
-                    that.model.options.onHide(that);
-                }
-                if (mustRender) {
+            $(document).on('click', '#' + that.model.view.id + ' .pwt-btn', function () {
+                if ($(this).is('.pwt-btn-next')) {
+                    that.model.state.navigate('next');
                     that.model.view.render();
-                } else {
-                    that.model.view.markSelectedDay();
+                    that.model.options.navigator.onNext(that.model);
                 }
-                that.model.options.dayPicker.onSelect(thisUnix);
-                that.model.options.onSelect(thisUnix);
+                else if ($(this).is('.pwt-btn-switch')) {
+                    that.model.state.switchViewMode();
+                    that.model.view.render();
+                    that.model.options.navigator.onSwitch(that.model);
+                }
+                else if ($(this).is('.pwt-btn-prev')) {
+                    that.model.state.navigate('prev');
+                    that.model.view.render();
+                    that.model.options.navigator.onPrev(that.model);
+                }
             });
         }
-
 
         /**
          * @description check if monthPicker enabled attach Events
@@ -242,7 +251,6 @@ class Navigator {
             });
         }
 
-
         /**
          * @description check if yearPicker enabled attach Events
          */
@@ -266,6 +274,15 @@ class Navigator {
                 that.model.options.yearPicker.onSelect(year);
                 that.model.options.onSelect(that.model.state.selected.unixDate);
             });
+        }
+
+    }
+
+    _mustRerender() {
+        if (this.model.options.multiSelect) {
+            return this.model.state.lastClickedMonthInMultiSelectMode !== this.model.state.view.month;
+        } else {
+            return this.model.state.selected.month !== this.model.state.view.month;
         }
     }
 }

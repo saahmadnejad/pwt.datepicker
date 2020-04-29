@@ -210,6 +210,24 @@
             </div>
           </div>
         </div>
+
+        <div class="col-xs-12 col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Persian Inline With Custom Weekdays and multiselect</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <input id="custom_weekdays_inline_multiselect_alt" class="form-control" disabled/>
+                <br/>
+                <div id="custom_weekdays_inline_multiselect" data-date="2025/3/12">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>
@@ -440,6 +458,55 @@
                     fontColor: '#3e4f59',
                 },
             },
+        });
+
+        $("#custom_weekdays_inline_multiselect").persianDatepicker({
+            calendar: {
+                persian: {
+                    enabled: true,
+                    locale: 'fa',
+                    showHint: true,
+                    leapYearMode: "astronomical" // "astronomical"
+                }
+            },
+            altField: '#custom_weekdays_inline_multiselect_alt',
+            altFormat: 'LLLL',
+            inline: true,
+            viewMode: 'day',
+            format: "lll",
+            customWeekdays:{
+                mode: 'extended',
+            },
+            theme: {
+                dayCell: {
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    backgroundColor: 'white',
+                    fontColor: '#1c1b19',
+                    disableFontColor: '#74909b',
+                    shape: 'circle', // circle, cube, rectangle
+                    hover: {
+                        fontColor: '#1c1b19',
+                        borderWidth: '1',
+                        borderStyle: 'solid',
+                        backgroundColor: 'white',
+                        borderColor: 'white',
+                        fontWeight: 'bold',
+                    },
+                    selected: {
+                        fontColor: '#1c1b19',
+                        borderWidth: '1',
+                        borderStyle: 'solid',
+                        backgroundColor: '#c8e6ff',
+                        borderColor: '#1373eb',
+                        fontWeight: 'bold',
+                    },
+                },
+                weekday: {
+                    fontColor: '#3e4f59',
+                },
+            },
+            multiSelect: true,
         });
     });
 </script>

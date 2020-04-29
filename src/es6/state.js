@@ -98,6 +98,10 @@ class State {
             dateObject: null
         };
 
+        this.selectedInMultiSelectMode = [];
+        this.lastClickedMonthInMultiSelectMode = 0;
+        this.lastClickedYearInMultiSelectMode = 0;
+
         this.ui = {
             isOpen: false,
             isInline: this.model.options.inline
@@ -263,6 +267,54 @@ class State {
         return this;
     }
 
+    setSelectedDateTimeInMultiSelectMode(key, value){
+        switch (key) {
+            case 'unix':
+                let pd = this.model.PersianDate.date(value);
+                let selectedDateTime = {
+                    unixDate: value,
+                    year: pd.year(),
+                    month: pd.month(),
+                    date: pd.date(),
+                    hour: pd.hour(),
+                    hour12: pd.format('hh'),
+                    minute: pd.minute(),
+                    second: pd.second(),
+                };
+                this.selectedInMultiSelectMode.push(selectedDateTime);
+                this.lastClickedYearInMultiSelectMode = pd.year();
+                this.lastClickedMonthInMultiSelectMode = pd.month();
+                break;
+        }
+        console.log('setSelectedDateTimeInMultiSelectMode');
+        console.log(this.selectedInMultiSelectMode);
+        console.log(key);
+        console.log(value);
+        this._updateSelectedUnix();
+        return this;
+    }
+
+    removeSelectedDateTimeFromMultiSelectMode(key, value) {
+        console.log('removeSelectedDateTimeFromMultiSelectMode');
+        console.log(this.selectedInMultiSelectMode);
+        switch (key) {
+            case 'unix':
+                let selectedDateIndex = null;
+                this.selectedInMultiSelectMode.forEach(function(element, index) {
+                    if (element.unixDate !== undefined && element.unixDate === value) {
+                        selectedDateIndex = index;
+                    }
+                });
+                console.log(this.selectedInMultiSelectMode);
+                this.lastClickedMonthInMultiSelectMode = this.selectedInMultiSelectMode[selectedDateIndex].month;
+                this.lastClickedYearInMultiSelectMode = this.selectedInMultiSelectMode[selectedDateIndex].year;
+                if (selectedDateIndex != null)
+                    this.selectedInMultiSelectMode.splice(selectedDateIndex, 1);
+                break;
+        }
+        this._updateSelectedUnix();
+        return this;
+    }
 
     /**
      * @return {State}
