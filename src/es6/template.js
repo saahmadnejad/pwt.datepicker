@@ -33,7 +33,9 @@ const Template = `
   color: {{theme.values.dayCell.disableFontColor}};
 }
 .datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row-cell{
-  color: {{theme.values.weekday.fontColor}}
+  color: {{theme.values.weekday.fontColor}};
+  font-weight: {{theme.values.weekday.fontWeight}};
+  font-size: {{theme.values.weekday.fontSize}};
 }
 </style>
 {{/theme.enabled}}
