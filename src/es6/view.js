@@ -104,6 +104,10 @@ class View {
     show () {
         this.$container.removeClass('pwt-hide');
         this.setPickerBoxPosition();
+        let width = this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').width();
+        this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('height', width + 'px');
+        this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('line-height', width + 'px');
+        this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('border-radius', '50%');
     }
 
     /**

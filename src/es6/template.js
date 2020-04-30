@@ -3,14 +3,6 @@
  */
 const Template = `
 {{#theme.enabled}}
-<script type="text/javascript">
-  $(document).ready(function(){
-      let borderWidth = {{theme.values.dayCell.hover.borderWidth}};
-      $('.datepicker-plot-area .datepicker-day-view .table-days td span').css('height', $('.datepicker-plot-area .datepicker-day-view .table-days td span').width() + 'px');
-      $('.datepicker-plot-area .datepicker-day-view .table-days td span').css('line-height', $('.datepicker-plot-area .datepicker-day-view .table-days td span').width() + 'px');
-      $('.datepicker-plot-area .datepicker-day-view .table-days td span').css('border-radius', '50%');
-  })
-</script>
 <style>
 .datepicker-plot-area .datepicker-day-view .table-days td .alter-calendar-day{
   color: {{theme.values.dayCell.hover.fontColor}};
