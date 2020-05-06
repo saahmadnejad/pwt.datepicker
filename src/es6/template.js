@@ -4,6 +4,11 @@
 const Template = `
 {{#theme.enabled}}
 <style>
+.datepicker-plot-area {
+  background-color: {{theme.values.plotArea.backgroundColor}};
+  box-shadow: {{theme.values.plotArea.boxShadow}};
+  border: {{theme.values.plotArea.border}};
+}
 .datepicker-plot-area .datepicker-day-view .table-days td .alter-calendar-day{
   color: {{theme.values.dayCell.hover.fontColor}};
 }
@@ -19,7 +24,8 @@ const Template = `
   text-shadow: none;
 }
 .datepicker-plot-area .datepicker-day-view .table-days td span {
-  border: {{theme.values.dayCell.hover.borderWidth}}px solid {{theme.values.dayCell.backgroundColor}};
+  border: {{theme.values.dayCell.borderWidth}}px solid {{theme.values.dayCell.borderColor}};
+  background-color: {{theme.values.dayCell.backgroundColor}};
 }
 .datepicker-plot-area .datepicker-day-view .table-days td span.other-month{
   color: {{theme.values.dayCell.disableFontColor}};
