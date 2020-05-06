@@ -1,5 +1,5 @@
 /*
-** m-persian-datepicker - v1.3.7
+** m-persian-datepicker - v1.3.8
 ** Reza Babakhani <babakhani.reza@gmail.com>, Seyed Ali Ahmadnejad <sa.ahmadnejad@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
 ** Under MIT license 
@@ -2858,10 +2858,6 @@ var View = function () {
         value: function show() {
             this.$container.removeClass('pwt-hide');
             this.setPickerBoxPosition();
-            var width = this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').width();
-            this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('height', width + 'px');
-            this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('line-height', width + 'px');
-            this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('border-radius', '50%');
         }
 
         /**
@@ -3467,6 +3463,10 @@ var View = function () {
             if (this.model.navigator) {
                 this.model.navigator.liveAttach();
             }
+            var width = this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').width();
+            this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('height', width + 'px');
+            this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('line-height', width + 'px');
+            this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('border-radius', '50%');
         }
     }]);
 
