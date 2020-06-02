@@ -488,7 +488,6 @@ class View {
      */
     getViewModel (data) {
         const anotherCalendar = this._getAnotherCalendar();
-        console.log(this.model.view.id);
         return {
             plotId: 'plotId' + this.model.view.id,
             Id: this.model.view.id,
@@ -570,7 +569,6 @@ class View {
         Helper.debug(this, 'render');
         Mustache.parse(Template);
         this.rendered = $(Mustache.render(this.model.options.template, this.getViewModel(data)));
-        console.log(this.$container);
         this.$container.empty().append(this.rendered);
         this.markSelectedDay();
         this.markToday();
