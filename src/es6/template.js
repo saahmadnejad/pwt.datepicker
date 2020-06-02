@@ -4,40 +4,50 @@
 const Template = `
 {{#theme.enabled}}
 <style>
-.datepicker-plot-area {
+#{{Id}} .datepicker-plot-area {
   background-color: {{theme.values.plotArea.backgroundColor}};
   box-shadow: {{theme.values.plotArea.boxShadow}};
   border: {{theme.values.plotArea.border}};
 }
-.datepicker-plot-area .datepicker-day-view .table-days td .alter-calendar-day{
+#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td .alter-calendar-day{
   color: {{theme.values.dayCell.hover.fontColor}};
 }
-.datepicker-plot-area .datepicker-day-view .table-days td{
+#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td{
   font-size: {{theme.values.dayCell.fontSize}};
   font-weight: {{theme.values.dayCell.fontWeight}};
   padding: 4px;
 }
-.datepicker-plot-area .datepicker-day-view .table-days td span:hover, .datepicker-plot-area .datepicker-day-view .table-days td.selected span{
+#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled) span:hover, .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled).selected span{
   background-color: {{theme.values.dayCell.hover.backgroundColor}};
   border: {{theme.values.dayCell.hover.borderWidth}}px {{theme.values.dayCell.hover.borderStyle}} {{theme.values.dayCell.hover.borderColor}};
   color: {{theme.values.dayCell.hover.fontColor}};
   text-shadow: none;
 }
-.datepicker-plot-area .datepicker-day-view .table-days td span {
+#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td span {
   border: {{theme.values.dayCell.borderWidth}}px solid {{theme.values.dayCell.borderColor}};
   background-color: {{theme.values.dayCell.backgroundColor}};
 }
-.datepicker-plot-area .datepicker-day-view .table-days td span.other-month{
-  color: {{theme.values.dayCell.disableFontColor}};
+#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td span.other-month{
+  color: {{theme.values.dayCell.otherMonthFontColor}};
 }
-.datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row-cell{
+#{{Id}} .datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row-cell{
   color: {{theme.values.weekday.fontColor}};
   font-weight: {{theme.values.weekday.fontWeight}};
   font-size: {{theme.values.weekday.fontSize}};
 }
+#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td.disabled span:hover, #{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td.selected.disabled span {
+  color: {{theme.values.dayCell.disableFontColor}};
+  text-shadow: none;
+}
+#{{Id}} .datepicker-plot-area .datepicker-month-view .month-item.selected {
+  background-color: {{theme.values.monthCell.backgroundColor}};
+}
+#{{Id}} .datepicker-plot-area .datepicker-year-view .year-item.selected {
+  background-color: {{theme.values.yearCell.backgroundColor}};
+}
 </style>
 {{/theme.enabled}}
-<div id="plotId" class="datepicker-plot-area {{cssClass}}">
+<div id="{{plotId}}" class="datepicker-plot-area {{cssClass}}">
     {{#navigator.enabled}}
         <div data-navigator class="datepicker-navigator">
             <div class="pwt-btn pwt-btn-next">{{navigator.text.btnNextText}}</div>
