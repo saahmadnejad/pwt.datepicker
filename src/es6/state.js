@@ -297,7 +297,7 @@ class State {
                     hour: pd.hour(),
                     hour12: pd.format('hh'),
                     minute: pd.minute(),
-                    second: pd.second(),
+                    second: pd.second()
                 };
                 this.selected.year = pd.year();
                 this.selected.month = pd.month();

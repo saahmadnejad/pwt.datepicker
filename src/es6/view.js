@@ -319,13 +319,9 @@ class View {
         let viewMonth, viewYear;
         //log('if you see this many time your code has performance issue');
 
-        if (false && this.model.options.multiSelect) {
-            viewMonth = (this.model.state.lastClickedMonthInMultiSelectMode !== 0) ? this.model.state.lastClickedMonthInMultiSelectMode : this.model.state.view.month;
-            viewYear = (this.model.state.lastClickedYearInMultiSelectMode !== 0) ? this.model.state.lastClickedYearInMultiSelectMode : this.model.state.view.year;
-        }else{
-            viewMonth = this.model.state.view.month;
-            viewYear = this.model.state.view.year;
-        }
+        viewMonth = this.model.state.view.month;
+        viewYear = this.model.state.view.year;
+
         let pdateInstance = this.model.PersianDate.date(),
           daysCount = pdateInstance.daysInMonth(viewYear, viewMonth),
           firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1,
@@ -383,7 +379,7 @@ class View {
     markSelectedDay (unixDate = -1) {
         if (this.model.options.multiSelect) {
             if (unixDate !== -1){
-                let td = this.$container.find("td[data-unix^='"+unixDate+"']");
+                let td = this.$container.find('td[data-unix^="'+unixDate+'"]');
                 if (this.isInSelectedDays(unixDate)) {
                     $(td[0]).removeClass('selected');
                 } else {
@@ -405,7 +401,7 @@ class View {
     isInSelectedDays (value) {
         const selected = this.model.state.selectedInMultiSelectMode;
         let found = false;
-        selected.forEach(function (obj, index) {
+        selected.forEach(function (obj) {
             if (found)  return true;
             if (obj.unixDate === value) {
                 found = true;
