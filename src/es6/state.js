@@ -98,6 +98,10 @@ class State {
             dateObject: null
         };
 
+        this.selectedInMultiSelectMode = [];
+        this.lastClickedMonthInMultiSelectMode = 0;
+        this.lastClickedYearInMultiSelectMode = 0;
+
         this.ui = {
             isOpen: false,
             isInline: this.model.options.inline
@@ -263,7 +267,6 @@ class State {
         return this;
     }
 
-
     /**
      * @return {State}
      * @private
@@ -280,6 +283,82 @@ class State {
         this.selected.unixDate = this.selected.dateObject.valueOf();
         this.model.updateInput(this.selected.unixDate);
         return this;
+    }
+
+    setSelectedDateTimeInMultiSelectMode(key, value){
+        switch (key) {
+            case 'unix':
+                let pd = this.model.PersianDate.date(value);
+                let selectedDateTime = {
+                    unixDate: value,
+                    year: pd.year(),
+                    month: pd.month(),
+                    date: pd.date(),
+                    hour: pd.hour(),
+                    hour12: pd.format('hh'),
+                    minute: pd.minute(),
+                    second: pd.second()
+                };
+                this.selected.year = pd.year();
+                this.selected.month = pd.month();
+                this.selected.date = pd.date();
+                this.selected.hour = pd.hour();
+                this.selected.hour12 = pd.format('hh');
+                this.selected.minute = pd.minute();
+                this.selected.second = pd.second();
+                this.selectedInMultiSelectMode.push(selectedDateTime);
+                this.lastClickedYearInMultiSelectMode = pd.year();
+                this.lastClickedMonthInMultiSelectMode = pd.month();
+                break;
+        }
+        this._updateSelectedDateObject();
+        this._updateSelectedUnixForMultiSelectMode(value);
+        return this;
+    }
+
+    removeSelectedDateTimeFromMultiSelectMode(key, value) {
+        this._updateSelectedUnixForMultiSelectMode(value);
+        switch (key) {
+            case 'unix':
+                let selectedDateIndex = null;
+                for(let i = 0; i < this.selectedInMultiSelectMode.length; i++) {
+                    let element = this.selectedInMultiSelectMode[i];
+                    if (element.unixDate !== undefined && element.unixDate === value) {
+                        selectedDateIndex = i;
+                    }
+                }
+                this.selected.year = this.selectedInMultiSelectMode[selectedDateIndex].year;
+                this.selected.month = this.selectedInMultiSelectMode[selectedDateIndex].month;
+                this.selected.date = this.selectedInMultiSelectMode[selectedDateIndex].date;
+                this.selected.hour = this.selectedInMultiSelectMode[selectedDateIndex].hour;
+                this.selected.hour12 = this.selectedInMultiSelectMode[selectedDateIndex].hour12;
+                this.selected.minute = this.selectedInMultiSelectMode[selectedDateIndex].minute;
+                this.selected.second = this.selectedInMultiSelectMode[selectedDateIndex].second;
+                this.lastClickedMonthInMultiSelectMode = this.selectedInMultiSelectMode[selectedDateIndex].month;
+                this.lastClickedYearInMultiSelectMode = this.selectedInMultiSelectMode[selectedDateIndex].year;
+                if (selectedDateIndex != null)
+                    this.selectedInMultiSelectMode.splice(selectedDateIndex, 1);
+                break;
+        }
+        this._updateSelectedDateObject();
+        return this;
+    }
+
+    _updateSelectedUnixForMultiSelectMode(unix){
+        this.model.updateInputForMultiSelectMode(unix);
+        return this;
+    }
+
+    _updateSelectedDateObject(){
+        this.selected.dateObject = this.model.PersianDate.date([
+            this.selected.year,
+            this.selected.month,
+            this.selected.date,
+            this.view.hour,
+            this.view.minute,
+            this.view.second
+        ]);
+        this.selected.unixDate = this.selected.dateObject.valueOf();
     }
 
 

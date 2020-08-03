@@ -1,3 +1,10 @@
+/*
+** m-persian-datepicker - v1.3.84
+** Reza Babakhani <babakhani.reza@gmail.com>, Seyed Ali Ahmadnejad <sa.ahmadnejad@gmail.com>
+** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
+** Under MIT license 
+*/ 
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -161,7 +168,7 @@ module.exports = Helper;
 /**
  * @type {string}
  */
-var Template = "\n{{#theme.enabled}}\n<style>\n#{{Id}} .datepicker-plot-area {\n  background-color: {{theme.values.plotArea.backgroundColor}};\n  box-shadow: {{theme.values.plotArea.boxShadow}};\n  border: {{theme.values.plotArea.border}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td .alter-calendar-day{\n  color: {{theme.values.dayCell.hover.fontColor}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td{\n  font-size: {{theme.values.dayCell.fontSize}};\n  font-weight: {{theme.values.dayCell.fontWeight}};\n  padding: 4px;\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled) span:hover, .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled).selected span{\n  background-color: {{theme.values.dayCell.hover.backgroundColor}};\n  border: {{theme.values.dayCell.hover.borderWidth}}px {{theme.values.dayCell.hover.borderStyle}} {{theme.values.dayCell.hover.borderColor}};\n  color: {{theme.values.dayCell.hover.fontColor}};\n  text-shadow: none;\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td span {\n  border: {{theme.values.dayCell.borderWidth}}px solid {{theme.values.dayCell.borderColor}};\n  background-color: {{theme.values.dayCell.backgroundColor}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td span.other-month{\n  color: {{theme.values.dayCell.otherMonthFontColor}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row-cell{\n  color: {{theme.values.weekday.fontColor}};\n  font-weight: {{theme.values.weekday.fontWeight}};\n  font-size: {{theme.values.weekday.fontSize}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td.disabled span:hover, #{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td.selected.disabled span {\n  color: {{theme.values.dayCell.disableFontColor}};\n  text-shadow: none;\n}\n#{{Id}} .datepicker-plot-area .datepicker-month-view .month-item.selected {\n  background-color: {{theme.values.monthCell.backgroundColor}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-year-view .year-item.selected {\n  background-color: {{theme.values.yearCell.backgroundColor}};\n}\n</style>\n{{/theme.enabled}}\n<div id=\"{{plotId}}\" class=\"datepicker-plot-area {{cssClass}}\">\n    {{#navigator.enabled}}\n        <div data-navigator class=\"datepicker-navigator\">\n            <div class=\"pwt-btn pwt-btn-next\">{{navigator.text.btnNextText}}</div>\n            <div class=\"pwt-btn pwt-btn-switch\">{{navigator.switch.text}}</div>\n            <div class=\"pwt-btn pwt-btn-prev\">{{navigator.text.btnPrevText}}</div>\n        </div>\n    {{/navigator.enabled}}\n    <div class=\"datepicker-grid-view\" >\n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        {{#weekdays.list}}\n                            <div class=\"header-row-cell\">{{.}}</div>\n                        {{/weekdays.list}}\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    {{#enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" >\n                                            <span  class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" class=\"disabled\">\n                                            <span class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    \n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-year=\"{{year}}\" data-month=\"{{dataMonth}}\" class=\"month-item {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-year=\"{{year}}\"data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    \n    </div>\n    {{#time}}\n    {{#enabled}}\n    <div class=\"datepicker-time-view\">\n        {{#hour.enabled}}\n            <div class=\"hour time-segment\" data-time-key=\"hour\">\n                <div class=\"up-btn\" data-time-key=\"hour\">\u25B2</div>\n                <input disabled value=\"{{hour.title}}\" type=\"text\" placeholder=\"hour\" class=\"hour-input\">\n                <div class=\"down-btn\" data-time-key=\"hour\">\u25BC</div>                    \n            </div>       \n            <div class=\"divider\">\n                <span>:</span>\n            </div>\n        {{/hour.enabled}}\n        {{#minute.enabled}}\n            <div class=\"minute time-segment\" data-time-key=\"minute\" >\n                <div class=\"up-btn\" data-time-key=\"minute\">\u25B2</div>\n                <input disabled value=\"{{minute.title}}\" type=\"text\" placeholder=\"minute\" class=\"minute-input\">\n                <div class=\"down-btn\" data-time-key=\"minute\">\u25BC</div>\n            </div>        \n            <div class=\"divider second-divider\">\n                <span>:</span>\n            </div>\n        {{/minute.enabled}}\n        {{#second.enabled}}\n            <div class=\"second time-segment\" data-time-key=\"second\"  >\n                <div class=\"up-btn\" data-time-key=\"second\" >\u25B2</div>\n                <input disabled value=\"{{second.title}}\"  type=\"text\" placeholder=\"second\" class=\"second-input\">\n                <div class=\"down-btn\" data-time-key=\"second\" >\u25BC</div>\n            </div>\n            <div class=\"divider meridian-divider\"></div>\n            <div class=\"divider meridian-divider\"></div>\n        {{/second.enabled}}\n        {{#meridian.enabled}}\n            <div class=\"meridian time-segment\" data-time-key=\"meridian\" >\n                <div class=\"up-btn\" data-time-key=\"meridian\">\u25B2</div>\n                <input disabled value=\"{{meridian.title}}\" type=\"text\" class=\"meridian-input\">\n                <div class=\"down-btn\" data-time-key=\"meridian\">\u25BC</div>\n            </div>\n        {{/meridian.enabled}}\n    </div>\n    {{/enabled}}\n    {{/time}}\n    \n    {{#toolbox}}\n    {{#enabled}}\n    <div class=\"toolbox\">\n        {{#toolbox.submitButton.enabled}}\n            <div class=\"pwt-btn-submit\">{{submitButtonText}}</div>\n        {{/toolbox.submitButton.enabled}}        \n        {{#toolbox.todayButton.enabled}}\n            <div class=\"pwt-btn-today\">{{todayButtonText}}</div>\n        {{/toolbox.todayButton.enabled}}        \n        {{#toolbox.calendarSwitch.enabled}}\n            <div class=\"pwt-btn-calendar\">{{calendarSwitchText}}</div>\n        {{/toolbox.calendarSwitch.enabled}}\n    </div>\n    {{/enabled}}\n    {{^enabled}}\n        {{#onlyTimePicker}}\n        <div class=\"toolbox\">\n            <div class=\"pwt-btn-submit\">{{submitButtonText}}</div>\n        </div>\n        {{/onlyTimePicker}}\n    {{/enabled}}\n    {{/toolbox}}\n</div>\n";
+var Template = "\n{{#theme.enabled}}\n<style>\n#{{Id}} .datepicker-plot-area {\n  background-color: {{theme.values.plotArea.backgroundColor}};\n  box-shadow: {{theme.values.plotArea.boxShadow}};\n  border: {{theme.values.plotArea.border}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td .alter-calendar-day{\n  color: {{theme.values.dayCell.hover.fontColor}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td{\n  font-size: {{theme.values.dayCell.fontSize}};\n  font-weight: {{theme.values.dayCell.fontWeight}};\n  padding: 4px;\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled) span:not(.other-month) {\n  border: {{theme.values.dayCell.borderWidth}}px solid {{theme.values.dayCell.borderColor}};\n  color: {{theme.values.dayCell.hover.fontColor}} !important;\n  background-color: {{theme.values.dayCell.backgroundColor}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled).selected span:hover, .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled).selected span{\n  background-color: {{theme.values.dayCell.hover.backgroundColor}} !important;\n  border: {{theme.values.dayCell.hover.borderWidth}}px {{theme.values.dayCell.hover.borderStyle}} {{theme.values.dayCell.hover.borderColor}} !important;\n  color: {{theme.values.dayCell.hover.fontColor}} !important;\n  text-shadow: none;\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td span.other-month{\n  color: {{theme.values.dayCell.otherMonthFontColor}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row-cell{\n  color: {{theme.values.weekday.fontColor}};\n  font-weight: {{theme.values.weekday.fontWeight}};\n  font-size: {{theme.values.weekday.fontSize}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td.disabled span:hover, #{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td.selected.disabled span {\n  color: {{theme.values.dayCell.disableFontColor}};\n  text-shadow: none;\n}\n#{{Id}} .datepicker-plot-area .datepicker-month-view .month-item.selected {\n  background-color: {{theme.values.monthCell.backgroundColor}};\n}\n#{{Id}} .datepicker-plot-area .datepicker-year-view .year-item.selected {\n  background-color: {{theme.values.yearCell.backgroundColor}};\n}\n</style>\n{{/theme.enabled}}\n<div id=\"{{plotId}}\" class=\"datepicker-plot-area {{cssClass}}\">\n    {{#navigator.enabled}}\n        <div data-navigator class=\"datepicker-navigator\">\n            <div class=\"pwt-btn pwt-btn-next\">{{navigator.text.btnNextText}}</div>\n            <div class=\"pwt-btn pwt-btn-switch\">{{navigator.switch.text}}</div>\n            <div class=\"pwt-btn pwt-btn-prev\">{{navigator.text.btnPrevText}}</div>\n        </div>\n    {{/navigator.enabled}}\n    <div class=\"datepicker-grid-view\" >\n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        {{#weekdays.list}}\n                            <div class=\"header-row-cell\">{{.}}</div>\n                        {{/weekdays.list}}\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    {{#enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" {{^otherMonth}}{{#selected}}class=\"selected\"{{/selected}}{{/otherMonth}}>\n                                            <span  class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" class=\"disabled\">\n                                            <span class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    \n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-year=\"{{year}}\" data-month=\"{{dataMonth}}\" class=\"month-item {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-year=\"{{year}}\"data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    \n    </div>\n    {{#time}}\n    {{#enabled}}\n    <div class=\"datepicker-time-view\">\n        {{#hour.enabled}}\n            <div class=\"hour time-segment\" data-time-key=\"hour\">\n                <div class=\"up-btn\" data-time-key=\"hour\">\u25B2</div>\n                <input disabled value=\"{{hour.title}}\" type=\"text\" placeholder=\"hour\" class=\"hour-input\">\n                <div class=\"down-btn\" data-time-key=\"hour\">\u25BC</div>                    \n            </div>       \n            <div class=\"divider\">\n                <span>:</span>\n            </div>\n        {{/hour.enabled}}\n        {{#minute.enabled}}\n            <div class=\"minute time-segment\" data-time-key=\"minute\" >\n                <div class=\"up-btn\" data-time-key=\"minute\">\u25B2</div>\n                <input disabled value=\"{{minute.title}}\" type=\"text\" placeholder=\"minute\" class=\"minute-input\">\n                <div class=\"down-btn\" data-time-key=\"minute\">\u25BC</div>\n            </div>        \n            <div class=\"divider second-divider\">\n                <span>:</span>\n            </div>\n        {{/minute.enabled}}\n        {{#second.enabled}}\n            <div class=\"second time-segment\" data-time-key=\"second\"  >\n                <div class=\"up-btn\" data-time-key=\"second\" >\u25B2</div>\n                <input disabled value=\"{{second.title}}\"  type=\"text\" placeholder=\"second\" class=\"second-input\">\n                <div class=\"down-btn\" data-time-key=\"second\" >\u25BC</div>\n            </div>\n            <div class=\"divider meridian-divider\"></div>\n            <div class=\"divider meridian-divider\"></div>\n        {{/second.enabled}}\n        {{#meridian.enabled}}\n            <div class=\"meridian time-segment\" data-time-key=\"meridian\" >\n                <div class=\"up-btn\" data-time-key=\"meridian\">\u25B2</div>\n                <input disabled value=\"{{meridian.title}}\" type=\"text\" class=\"meridian-input\">\n                <div class=\"down-btn\" data-time-key=\"meridian\">\u25BC</div>\n            </div>\n        {{/meridian.enabled}}\n    </div>\n    {{/enabled}}\n    {{/time}}\n    \n    {{#toolbox}}\n    {{#enabled}}\n    <div class=\"toolbox\">\n        {{#toolbox.submitButton.enabled}}\n            <div class=\"pwt-btn-submit\">{{submitButtonText}}</div>\n        {{/toolbox.submitButton.enabled}}        \n        {{#toolbox.todayButton.enabled}}\n            <div class=\"pwt-btn-today\">{{todayButtonText}}</div>\n        {{/toolbox.todayButton.enabled}}        \n        {{#toolbox.calendarSwitch.enabled}}\n            <div class=\"pwt-btn-calendar\">{{calendarSwitchText}}</div>\n        {{/toolbox.calendarSwitch.enabled}}\n    </div>\n    {{/enabled}}\n    {{^enabled}}\n        {{#onlyTimePicker}}\n        <div class=\"toolbox\">\n            <div class=\"pwt-btn-submit\">{{submitButtonText}}</div>\n        </div>\n        {{/onlyTimePicker}}\n    {{/enabled}}\n    {{/toolbox}}\n</div>\n";
 
 module.exports = Template;
 
@@ -263,8 +270,16 @@ var Model = function () {
         this.input.update(unix);
       };
 
+      this.updateInputForMultiSelectMode = function (unixTime) {
+        this.input.updateForMultiSelectMode(unixTime);
+      };
+
       this.state.setViewDateTime('unix', this.input.getOnInitState());
-      this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+      if (this.options.multiSelect) {
+        this.state.setSelectedDateTimeInMultiSelectMode('unix', this.input.getOnInitState());
+      } else {
+        this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+      }
       this.view.render();
 
       /**
@@ -1654,6 +1669,23 @@ var Input = function () {
             var value = this.model.options.altFieldFormatter(unix);
             $(this.model.options.altField).val(value);
         }
+    }, {
+        key: '_updateAltFieldForMultiSelectMode',
+        value: function _updateAltFieldForMultiSelectMode(unix) {
+            var value = this.model.options.altFieldFormatter(unix);
+            var str = $(this.model.options.altField).val();
+            if (str.indexOf(value) >= 0) {
+                if (str.indexOf('|' + value) >= 0) {
+                    str = str.replace('|' + value, '');
+                    $(this.model.options.altField).val(str);
+                } else {
+                    str = str.replace(value, '');
+                    $(this.model.options.altField).val(str);
+                }
+            } else {
+                $(this.model.options.altField).val($(this.model.options.altField).val() + '|' + value);
+            }
+        }
 
         /**
          * @desc update <input/> element value
@@ -1670,6 +1702,23 @@ var Input = function () {
                 $(this.elem).val(value);
             }
         }
+    }, {
+        key: '_updateInputFieldForMultiSelectMode',
+        value: function _updateInputFieldForMultiSelectMode(unix) {
+            var value = this.model.options.formatter(unix);
+            var str = $(this.elem).val();
+            if (str.indexOf(value) >= 0) {
+                if (str.indexOf('|' + value) >= 0) {
+                    str = str.replace('|' + value, '');
+                    $(this.elem).val(str);
+                } else {
+                    str = str.replace(value, '');
+                    $(this.elem).val(str);
+                }
+            } else {
+                $(this.elem).val($(this.elem).val() + '|' + value);
+            }
+        }
 
         /**
          * @param unix
@@ -1684,6 +1733,12 @@ var Input = function () {
                 this._updateInputField(unix);
                 this._updateAltField(unix);
             }
+        }
+    }, {
+        key: 'updateForMultiSelectMode',
+        value: function updateForMultiSelectMode(unixTime) {
+            this._updateAltFieldForMultiSelectMode(unixTime);
+            this._updateInputFieldForMultiSelectMode(unixTime);
         }
 
         /**
@@ -1732,7 +1787,12 @@ var Input = function () {
                 if (garegurianDate && garegurianDate != 'undefined') {
                     this.initialUnix = garegurianDate;
                 } else {
-                    this.initialUnix = new Date().valueOf();
+                    var d = new Date();
+                    d.setHours(12);
+                    d.setMinutes(0);
+                    d.setSeconds(0);
+                    d.setMilliseconds(0);
+                    this.initialUnix = new Date(d.toString()).valueOf();
                 }
             }
             return this.initialUnix;
@@ -1907,24 +1967,46 @@ var Navigator = function () {
         value: function _attachEvents() {
             var that = this;
 
-            if (this.model.options.navigator.enabled) {
-                /**
-                 * @description navigator click event
-                 */
-                $(document).on('click', '#' + that.model.view.id + ' .pwt-btn', function () {
-                    if ($(this).is('.pwt-btn-next')) {
-                        that.model.state.navigate('next');
-                        that.model.view.render();
-                        that.model.options.navigator.onNext(that.model);
-                    } else if ($(this).is('.pwt-btn-switch')) {
-                        that.model.state.switchViewMode();
-                        that.model.view.render();
-                        that.model.options.navigator.onSwitch(that.model);
-                    } else if ($(this).is('.pwt-btn-prev')) {
-                        that.model.state.navigate('prev');
-                        that.model.view.render();
-                        that.model.options.navigator.onPrev(that.model);
+            /**
+             * @description check if dayPicker enabled attach Events
+             */
+            if (this.model.options.dayPicker.enabled) {
+
+                $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td:not(.disabled)', function () {
+                    var selected = $(this).hasClass('selected');
+
+                    var thisUnix = $(this).data('unix');
+
+                    //TODO must be checked
+
+                    if (!that.model.options.multiSelect) {
+                        that.model.state.setSelectedDateTime('unix', thisUnix);
                     }
+
+                    that.model.view.markSelectedDay(thisUnix);
+
+                    if (that.model.options.multiSelect) {
+                        if (selected) {
+                            that.model.state.removeSelectedDateTimeFromMultiSelectMode('unix', thisUnix);
+                        } else {
+                            that.model.state.setSelectedDateTimeInMultiSelectMode('unix', thisUnix);
+                        }
+                    }
+
+                    var mustRerender = that._mustRerender();
+                    that.model.state.setViewDateTime('unix', that.model.state.selected.unixDate);
+
+                    if (that.model.options.autoClose) {
+                        that.model.view.hide();
+                        that.model.options.onHide(that);
+                    }
+
+                    if (mustRerender) {
+                        that.model.view.render();
+                    }
+
+                    that.model.options.dayPicker.onSelect(thisUnix);
+                    that.model.options.onSelect(thisUnix);
                 });
             }
 
@@ -1952,35 +2034,24 @@ var Navigator = function () {
                 });
             }
 
-            /**
-             * @description check if dayPicker enabled attach Events
-             */
-            if (this.model.options.dayPicker.enabled) {
-
+            if (this.model.options.navigator.enabled) {
                 /**
-                 * @description days click event
+                 * @description navigator click event
                  */
-                $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td:not(.disabled)', function () {
-                    var thisUnix = $(this).data('unix'),
-                        mustRender = void 0;
-                    that.model.state.setSelectedDateTime('unix', thisUnix);
-                    if (that.model.state.selected.month !== that.model.state.view.month) {
-                        mustRender = true;
-                    } else {
-                        mustRender = false;
-                    }
-                    that.model.state.setViewDateTime('unix', that.model.state.selected.unixDate);
-                    if (that.model.options.autoClose) {
-                        that.model.view.hide();
-                        that.model.options.onHide(that);
-                    }
-                    if (mustRender) {
+                $(document).on('click', '#' + that.model.view.id + ' .pwt-btn', function () {
+                    if ($(this).is('.pwt-btn-next')) {
+                        that.model.state.navigate('next');
                         that.model.view.render();
-                    } else {
-                        that.model.view.markSelectedDay();
+                        that.model.options.navigator.onNext(that.model);
+                    } else if ($(this).is('.pwt-btn-switch')) {
+                        that.model.state.switchViewMode();
+                        that.model.view.render();
+                        that.model.options.navigator.onSwitch(that.model);
+                    } else if ($(this).is('.pwt-btn-prev')) {
+                        that.model.state.navigate('prev');
+                        that.model.view.render();
+                        that.model.options.navigator.onPrev(that.model);
                     }
-                    that.model.options.dayPicker.onSelect(thisUnix);
-                    that.model.options.onSelect(thisUnix);
                 });
             }
 
@@ -2034,6 +2105,15 @@ var Navigator = function () {
                     that.model.options.yearPicker.onSelect(year);
                     that.model.options.onSelect(that.model.state.selected.unixDate);
                 });
+            }
+        }
+    }, {
+        key: '_mustRerender',
+        value: function _mustRerender() {
+            if (this.model.options.multiSelect) {
+                return this.model.state.lastClickedMonthInMultiSelectMode !== this.model.state.view.month || this.model.state.lastClickedYearInMultiSelectMode !== this.model.state.view.year;
+            } else {
+                return this.model.state.selected.month !== this.model.state.view.month;
             }
         }
     }]);
@@ -2351,6 +2431,10 @@ var State = function () {
             dateObject: null
         };
 
+        this.selectedInMultiSelectMode = [];
+        this.lastClickedMonthInMultiSelectMode = 0;
+        this.lastClickedYearInMultiSelectMode = 0;
+
         this.ui = {
             isOpen: false,
             isInline: this.model.options.inline
@@ -2541,6 +2625,78 @@ var State = function () {
             this.selected.unixDate = this.selected.dateObject.valueOf();
             this.model.updateInput(this.selected.unixDate);
             return this;
+        }
+    }, {
+        key: 'setSelectedDateTimeInMultiSelectMode',
+        value: function setSelectedDateTimeInMultiSelectMode(key, value) {
+            switch (key) {
+                case 'unix':
+                    var pd = this.model.PersianDate.date(value);
+                    var selectedDateTime = {
+                        unixDate: value,
+                        year: pd.year(),
+                        month: pd.month(),
+                        date: pd.date(),
+                        hour: pd.hour(),
+                        hour12: pd.format('hh'),
+                        minute: pd.minute(),
+                        second: pd.second()
+                    };
+                    this.selected.year = pd.year();
+                    this.selected.month = pd.month();
+                    this.selected.date = pd.date();
+                    this.selected.hour = pd.hour();
+                    this.selected.hour12 = pd.format('hh');
+                    this.selected.minute = pd.minute();
+                    this.selected.second = pd.second();
+                    this.selectedInMultiSelectMode.push(selectedDateTime);
+                    this.lastClickedYearInMultiSelectMode = pd.year();
+                    this.lastClickedMonthInMultiSelectMode = pd.month();
+                    break;
+            }
+            this._updateSelectedDateObject();
+            this._updateSelectedUnixForMultiSelectMode(value);
+            return this;
+        }
+    }, {
+        key: 'removeSelectedDateTimeFromMultiSelectMode',
+        value: function removeSelectedDateTimeFromMultiSelectMode(key, value) {
+            this._updateSelectedUnixForMultiSelectMode(value);
+            switch (key) {
+                case 'unix':
+                    var selectedDateIndex = null;
+                    for (var i = 0; i < this.selectedInMultiSelectMode.length; i++) {
+                        var element = this.selectedInMultiSelectMode[i];
+                        if (element.unixDate !== undefined && element.unixDate === value) {
+                            selectedDateIndex = i;
+                        }
+                    }
+                    this.selected.year = this.selectedInMultiSelectMode[selectedDateIndex].year;
+                    this.selected.month = this.selectedInMultiSelectMode[selectedDateIndex].month;
+                    this.selected.date = this.selectedInMultiSelectMode[selectedDateIndex].date;
+                    this.selected.hour = this.selectedInMultiSelectMode[selectedDateIndex].hour;
+                    this.selected.hour12 = this.selectedInMultiSelectMode[selectedDateIndex].hour12;
+                    this.selected.minute = this.selectedInMultiSelectMode[selectedDateIndex].minute;
+                    this.selected.second = this.selectedInMultiSelectMode[selectedDateIndex].second;
+                    this.lastClickedMonthInMultiSelectMode = this.selectedInMultiSelectMode[selectedDateIndex].month;
+                    this.lastClickedYearInMultiSelectMode = this.selectedInMultiSelectMode[selectedDateIndex].year;
+                    if (selectedDateIndex != null) this.selectedInMultiSelectMode.splice(selectedDateIndex, 1);
+                    break;
+            }
+            this._updateSelectedDateObject();
+            return this;
+        }
+    }, {
+        key: '_updateSelectedUnixForMultiSelectMode',
+        value: function _updateSelectedUnixForMultiSelectMode(unix) {
+            this.model.updateInputForMultiSelectMode(unix);
+            return this;
+        }
+    }, {
+        key: '_updateSelectedDateObject',
+        value: function _updateSelectedDateObject() {
+            this.selected.dateObject = this.model.PersianDate.date([this.selected.year, this.selected.month, this.selected.date, this.view.hour, this.view.minute, this.view.second]);
+            this.selected.unixDate = this.selected.dateObject.valueOf();
         }
 
         /**
@@ -3085,6 +3241,7 @@ var View = function () {
         value: function checkDayAccess(unixtimespan) {
             var self = this,
                 output = true;
+
             self.minDate = this.model.options.minDate;
             self.maxDate = this.model.options.maxDate;
 
@@ -3132,9 +3289,17 @@ var View = function () {
                 };
             }
 
+            var viewMonth = void 0,
+                viewYear = void 0;
             //log('if you see this many time your code has performance issue');
-            var viewMonth = this.model.state.view.month,
+
+            if (false) {
+                viewMonth = this.model.state.lastClickedMonthInMultiSelectMode !== 0 ? this.model.state.lastClickedMonthInMultiSelectMode : this.model.state.view.month;
+                viewYear = this.model.state.lastClickedYearInMultiSelectMode !== 0 ? this.model.state.lastClickedYearInMultiSelectMode : this.model.state.view.year;
+            } else {
+                viewMonth = this.model.state.view.month;
                 viewYear = this.model.state.view.year;
+            }
             var pdateInstance = this.model.PersianDate.date(),
                 daysCount = pdateInstance.daysInMonth(viewYear, viewMonth),
                 firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1,
@@ -3185,6 +3350,7 @@ var View = function () {
                                 dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
                                 dataUnix: calcedDate.hour(12).valueOf(),
                                 otherMonth: otherMonth,
+                                selected: this.isInSelectedDays(calcedDate.hour(12).valueOf()),
                                 // TODO: make configurable
                                 enabled: this.checkDayAccess(calcedDate.valueOf())
                             });
@@ -3228,14 +3394,40 @@ var View = function () {
     }, {
         key: 'markSelectedDay',
         value: function markSelectedDay() {
-            var selected = this.model.state.selected;
-            this.$container.find('.table-days td').each(function () {
-                if ($(this).data('date') == [selected.year, selected.month, selected.date].join(',')) {
-                    $(this).addClass('selected');
-                } else {
-                    $(this).removeClass('selected');
+            var unixDate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+
+            if (this.model.options.multiSelect) {
+                if (unixDate !== -1) {
+                    var td = this.$container.find("td[data-unix^='" + unixDate + "']");
+                    if (this.isInSelectedDays(unixDate)) {
+                        $(td[0]).removeClass('selected');
+                    } else {
+                        $(td[0]).addClass('selected');
+                    }
+                }
+            } else {
+                var selected = this.model.state.selected;
+                this.$container.find('.table-days td').each(function () {
+                    if ($(this).data('date') == [selected.year, selected.month, selected.date].join(',')) {
+                        $(this).addClass('selected');
+                    } else {
+                        $(this).removeClass('selected');
+                    }
+                });
+            }
+        }
+    }, {
+        key: 'isInSelectedDays',
+        value: function isInSelectedDays(value) {
+            var selected = this.model.state.selectedInMultiSelectMode;
+            var found = false;
+            selected.forEach(function (obj, index) {
+                if (found) return true;
+                if (obj.unixDate === value) {
+                    found = true;
                 }
             });
+            return found;
         }
     }, {
         key: 'markToday',
@@ -3348,7 +3540,6 @@ var View = function () {
         key: 'getViewModel',
         value: function getViewModel(data) {
             var anotherCalendar = this._getAnotherCalendar();
-            console.log(this.model.view.id);
             return {
                 plotId: 'plotId' + this.model.view.id,
                 Id: this.model.view.id,
@@ -3372,6 +3563,7 @@ var View = function () {
                     enabled: this.model.options.theme !== undefined,
                     values: this.model.options.theme
                 },
+                multiSelect: this.model.options.multiSelect !== undefined && this.model.options.multiSelect === true,
                 onlyTimePicker: this.model.options.onlyTimePicker,
                 altCalendarShowHint: this.model.options.calendar[anotherCalendar[0]].showHint,
                 calendarSwitchText: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format(this.model.options.toolbox.calendarSwitch.format),
@@ -3436,7 +3628,6 @@ var View = function () {
             Helper.debug(this, 'render');
             Mustache.parse(Template);
             this.rendered = $(Mustache.render(this.model.options.template, this.getViewModel(data)));
-            console.log(this.$container);
             this.$container.empty().append(this.rendered);
             this.markSelectedDay();
             this.markToday();

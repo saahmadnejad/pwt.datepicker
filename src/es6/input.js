@@ -142,7 +142,7 @@ class Input {
             evt.stopPropagation();
             return false;
         }, 200));
-       
+
         $(this.elem).on('keydown', Helper.debounce(function (evt) {
             if (evt.which === 9){
               that.model.api.hide();
@@ -187,6 +187,21 @@ class Input {
         $(this.model.options.altField).val(value);
     }
 
+    _updateAltFieldForMultiSelectMode(unix) {
+        let value = this.model.options.altFieldFormatter(unix);
+        let str = $(this.model.options.altField).val();
+        if (str.indexOf(value) >= 0){
+            if (str.indexOf('|'+value) >= 0){
+                str = str.replace('|' + value, '');
+                $(this.model.options.altField).val(str);
+            }else{
+                str = str.replace(value, '');
+                $(this.model.options.altField).val(str);
+            }
+        }else{
+            $(this.model.options.altField).val($(this.model.options.altField).val() + '|' + value);
+        }
+    }
 
     /**
      * @desc update <input/> element value
@@ -198,6 +213,22 @@ class Input {
         let value = this.model.options.formatter(unix);
         if ($(this.elem).val() != value) {
             $(this.elem).val(value);
+        }
+    }
+
+    _updateInputFieldForMultiSelectMode(unix) {
+        let value = this.model.options.formatter(unix);
+        let str = $(this.elem).val();
+        if (str.indexOf(value) >= 0){
+            if (str.indexOf('|'+value) >= 0){
+                str = str.replace('|' + value, '');
+                $(this.elem).val(str);
+            }else{
+                str = str.replace(value, '');
+                $(this.elem).val(str);
+            }
+        }else{
+            $(this.elem).val($(this.elem).val() + '|' + value);
         }
     }
 
@@ -213,6 +244,11 @@ class Input {
             this._updateAltField(unix);
 
         }
+    }
+
+    updateForMultiSelectMode(unixTime) {
+        this._updateAltFieldForMultiSelectMode(unixTime);
+        this._updateInputFieldForMultiSelectMode(unixTime);
     }
 
 
@@ -262,7 +298,12 @@ class Input {
                 this.initialUnix = garegurianDate;
             }
             else {
-                this.initialUnix = new Date().valueOf();
+                let d = new Date();
+                d.setHours(12);
+                d.setMinutes(0);
+                d.setSeconds(0);
+                d.setMilliseconds(0);
+                this.initialUnix = new Date(d.toString()).valueOf();
             }
         }
         return this.initialUnix;

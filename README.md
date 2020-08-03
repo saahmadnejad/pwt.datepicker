@@ -180,6 +180,7 @@ npm i m-persian-datepicker
 | customWeekdays                 | object           |                                                 |  |
 | customWeekdays.mode            | string           | "min", "extended", "custom"                     |  |
 | customWeekdays.list            | array            | ['😃', '😄', '😁', '😆', '😅', '🤣', '😂']       | If customWeekdays.mode == "custom", then you can see your Custom Weekdays list in calendar  |
+| multiSelect                    | boolean          | false                                           | set true for multiple select mode
 
 ## license
 Freely distributable under the terms of the [MIT](https://opensource.org/licenses/MIT) license. 

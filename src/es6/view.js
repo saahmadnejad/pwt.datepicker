@@ -269,6 +269,7 @@ class View {
     checkDayAccess (unixtimespan) {
         let self = this,
           output = true;
+
         self.minDate = this.model.options.minDate;
         self.maxDate = this.model.options.maxDate;
 
@@ -315,8 +316,12 @@ class View {
             };
         }
 
+        let viewMonth, viewYear;
         //log('if you see this many time your code has performance issue');
-        const viewMonth = this.model.state.view.month, viewYear = this.model.state.view.year;
+
+        viewMonth = this.model.state.view.month;
+        viewYear = this.model.state.view.year;
+
         let pdateInstance = this.model.PersianDate.date(),
           daysCount = pdateInstance.daysInMonth(viewYear, viewMonth),
           firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1,
@@ -358,6 +363,7 @@ class View {
                     dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
                     dataUnix: calcedDate.hour(12).valueOf(),
                     otherMonth: otherMonth,
+                    selected: this.isInSelectedDays(calcedDate.hour(12).valueOf()),
                     // TODO: make configurable
                     enabled: this.checkDayAccess(calcedDate.valueOf())
                 });
@@ -370,15 +376,38 @@ class View {
         };
     }
 
-    markSelectedDay () {
-        const selected = this.model.state.selected;
-        this.$container.find('.table-days td').each(function () {
-            if ($(this).data('date') == [selected.year, selected.month, selected.date].join(',')) {
-                $(this).addClass('selected');
-            } else {
-                $(this).removeClass('selected');
+    markSelectedDay (unixDate = -1) {
+        if (this.model.options.multiSelect) {
+            if (unixDate !== -1){
+                let td = this.$container.find('td[data-unix^="'+unixDate+'"]');
+                if (this.isInSelectedDays(unixDate)) {
+                    $(td[0]).removeClass('selected');
+                } else {
+                    $(td[0]).addClass('selected');
+                }
+            }
+        } else {
+            const selected = this.model.state.selected;
+            this.$container.find('.table-days td').each(function () {
+                if ($(this).data('date') == [selected.year, selected.month, selected.date].join(',')) {
+                    $(this).addClass('selected');
+                } else {
+                    $(this).removeClass('selected');
+                }
+            });
+        }
+    }
+
+    isInSelectedDays (value) {
+        const selected = this.model.state.selectedInMultiSelectMode;
+        let found = false;
+        selected.forEach(function (obj) {
+            if (found)  return true;
+            if (obj.unixDate === value) {
+                found = true;
             }
         });
+        return found;
     }
 
     markToday () {
@@ -456,7 +485,6 @@ class View {
                 default:
                     weekdaysList = this.model.PersianDate.date().rangeName().weekdaysMin;
             }
-
         }else{
             weekdaysList = this.model.PersianDate.date().rangeName().weekdaysMin;
         }
@@ -511,6 +539,7 @@ class View {
                 enabled: (this.model.options.theme !== undefined),
                 values: this.model.options.theme
             },
+            multiSelect: ((this.model.options.multiSelect !== undefined) && (this.model.options.multiSelect === true)),
             onlyTimePicker: this.model.options.onlyTimePicker,
             altCalendarShowHint: this.model.options.calendar[anotherCalendar[0]].showHint,
             calendarSwitchText: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format(this.model.options.toolbox.calendarSwitch.format),

@@ -17,15 +17,16 @@ const Template = `
   font-weight: {{theme.values.dayCell.fontWeight}};
   padding: 4px;
 }
-#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled) span:hover, .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled).selected span{
-  background-color: {{theme.values.dayCell.hover.backgroundColor}};
-  border: {{theme.values.dayCell.hover.borderWidth}}px {{theme.values.dayCell.hover.borderStyle}} {{theme.values.dayCell.hover.borderColor}};
-  color: {{theme.values.dayCell.hover.fontColor}};
-  text-shadow: none;
-}
-#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td span {
+#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled) span:not(.other-month) {
   border: {{theme.values.dayCell.borderWidth}}px solid {{theme.values.dayCell.borderColor}};
+  color: {{theme.values.dayCell.hover.fontColor}} !important;
   background-color: {{theme.values.dayCell.backgroundColor}};
+}
+#{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled).selected span:hover, .datepicker-plot-area .datepicker-day-view .table-days td:not(.disabled).selected span{
+  background-color: {{theme.values.dayCell.hover.backgroundColor}} !important;
+  border: {{theme.values.dayCell.hover.borderWidth}}px {{theme.values.dayCell.hover.borderStyle}} {{theme.values.dayCell.hover.borderColor}} !important;
+  color: {{theme.values.dayCell.hover.fontColor}} !important;
+  text-shadow: none;
 }
 #{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td span.other-month{
   color: {{theme.values.dayCell.otherMonthFontColor}};
@@ -75,7 +76,7 @@ const Template = `
                             <tr>
                                 {{#.}}
                                     {{#enabled}}
-                                        <td data-date="{{dataDate}}" data-unix="{{dataUnix}}" >
+                                        <td data-date="{{dataDate}}" data-unix="{{dataUnix}}" {{^otherMonth}}{{#selected}}class="selected"{{/selected}}{{/otherMonth}}>
                                             <span  class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span>
                                             {{#altCalendarShowHint}}
                                             <i  class="alter-calendar-day">{{alterCalTitle}}</i>
