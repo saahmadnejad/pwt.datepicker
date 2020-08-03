@@ -220,7 +220,7 @@
               <div class="form-group">
                 <input id="custom_weekdays_inline_multiselect_alt" class="form-control" disabled/>
                 <br/>
-                <div id="custom_weekdays_inline_multiselect" data-date="2025/3/12">
+                <div id="custom_weekdays_inline_multiselect">
                 </div>
               </div>
             </div>
@@ -438,12 +438,20 @@
                 mode: 'extended',
             },
             theme: {
+                plotArea: {
+                    backgroundColor: 'transparent',
+                    boxShadow: 'none',
+                    border: 'none',
+                },
                 dayCell: {
                     fontSize: '20px',
                     fontWeight: 'bold',
                     backgroundColor: 'white',
+                    borderColor: 'white',
+                    borderWidth: '1',
                     fontColor: '#1c1b19',
-                    disableFontColor: '#74909b',
+                    otherMonthFontColor: '#74909b',
+                    disableFontColor: '#ccc',
                     shape: 'circle', // circle, cube, rectangle
                     hover: {
                         fontColor: '#1c1b19',
@@ -454,10 +462,19 @@
                         fontWeight: 'bold',
                     },
                 },
+                monthCell: {
+                    backgroundColor: '#c8e6ff',
+                },
+                yearCell: {
+                    backgroundColor: '#c8e6ff',
+                },
                 weekday: {
                     fontColor: '#3e4f59',
+                    fontWeight: 'normal',
+                    fontSize: '10px',
                 },
             },
+            multiSelect: false
         });
 
         $("#custom_weekdays_inline_multiselect").persianDatepicker({
@@ -470,30 +487,30 @@
                 }
             },
             altField: '#custom_weekdays_inline_multiselect_alt',
-            altFormat: 'LLLL',
+            altFormat: 'X',
             inline: true,
             viewMode: 'day',
-            format: "lll",
+            format: "X",
             customWeekdays:{
                 mode: 'extended',
             },
             theme: {
+                plotArea: {
+                    backgroundColor: 'transparent',
+                    boxShadow: 'none',
+                    border: 'none',
+                },
                 dayCell: {
                     fontSize: '20px',
                     fontWeight: 'bold',
                     backgroundColor: 'white',
+                    borderColor: 'white',
+                    borderWidth: '1',
                     fontColor: '#1c1b19',
-                    disableFontColor: '#74909b',
+                    otherMonthFontColor: '#74909b',
+                    disableFontColor: '#ccc',
                     shape: 'circle', // circle, cube, rectangle
                     hover: {
-                        fontColor: '#1c1b19',
-                        borderWidth: '1',
-                        borderStyle: 'solid',
-                        backgroundColor: 'white',
-                        borderColor: 'white',
-                        fontWeight: 'bold',
-                    },
-                    selected: {
                         fontColor: '#1c1b19',
                         borderWidth: '1',
                         borderStyle: 'solid',
@@ -502,8 +519,16 @@
                         fontWeight: 'bold',
                     },
                 },
+                monthCell: {
+                    backgroundColor: '#c8e6ff',
+                },
+                yearCell: {
+                    backgroundColor: '#c8e6ff',
+                },
                 weekday: {
                     fontColor: '#3e4f59',
+                    fontWeight: 'normal',
+                    fontSize: '10px',
                 },
             },
             multiSelect: true,

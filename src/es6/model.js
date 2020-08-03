@@ -85,8 +85,16 @@ class Model {
             this.input.update(unix);
         };
 
+        this.updateInputForMultiSelectMode = function(unixTime){
+            this.input.updateForMultiSelectMode(unixTime);
+        };
+
         this.state.setViewDateTime('unix', this.input.getOnInitState());
-        this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+        if (this.options.multiSelect){
+            this.state.setSelectedDateTimeInMultiSelectMode('unix', this.input.getOnInitState());
+        }else{
+            this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+        }
         this.view.render();
 
         /**

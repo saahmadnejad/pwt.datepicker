@@ -144,24 +144,12 @@ class Navigator {
                 let thisUnix = $(this).data('unix');
 
                 //TODO must be checked
-                that.model.state.setViewDateTime('unix', that.model.state.selected.unixDate);
 
-                if (that.model.options.autoClose) {
-                    that.model.view.hide();
-                    that.model.options.onHide(that);
+                if(!that.model.options.multiSelect) {
+                    that.model.state.setSelectedDateTime('unix', thisUnix);
                 }
 
-                console.log('that._mustRerender()');
-                console.log(that._mustRerender());
-
-                if (that._mustRerender()) {
-                    that.model.view.render();
-                } else {
-                    console.log('XXXXXXXXXXXXX');
-                    console.log(thisUnix);
-                    console.log('XXXXXXXXXXXXX');
-                    that.model.view.markSelectedDay(thisUnix);
-                }
+                that.model.view.markSelectedDay(thisUnix);
 
                 if (that.model.options.multiSelect) {
                     if (selected) {
@@ -169,6 +157,18 @@ class Navigator {
                     } else {
                         that.model.state.setSelectedDateTimeInMultiSelectMode('unix', thisUnix);
                     }
+                }
+
+                let mustRerender = that._mustRerender();
+                that.model.state.setViewDateTime('unix', that.model.state.selected.unixDate);
+
+                if (that.model.options.autoClose) {
+                    that.model.view.hide();
+                    that.model.options.onHide(that);
+                }
+
+                if (mustRerender) {
+                    that.model.view.render();
                 }
 
                 that.model.options.dayPicker.onSelect(thisUnix);
@@ -280,7 +280,7 @@ class Navigator {
 
     _mustRerender() {
         if (this.model.options.multiSelect) {
-            return this.model.state.lastClickedMonthInMultiSelectMode !== this.model.state.view.month;
+            return (this.model.state.lastClickedMonthInMultiSelectMode !== this.model.state.view.month) || (this.model.state.lastClickedYearInMultiSelectMode !== this.model.state.view.year);
         } else {
             return this.model.state.selected.month !== this.model.state.view.month;
         }

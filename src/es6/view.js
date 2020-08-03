@@ -269,6 +269,7 @@ class View {
     checkDayAccess (unixtimespan) {
         let self = this,
           output = true;
+
         self.minDate = this.model.options.minDate;
         self.maxDate = this.model.options.maxDate;
 
@@ -315,8 +316,16 @@ class View {
             };
         }
 
+        let viewMonth, viewYear;
         //log('if you see this many time your code has performance issue');
-        const viewMonth = this.model.state.view.month, viewYear = this.model.state.view.year;
+
+        if (false && this.model.options.multiSelect) {
+            viewMonth = (this.model.state.lastClickedMonthInMultiSelectMode !== 0) ? this.model.state.lastClickedMonthInMultiSelectMode : this.model.state.view.month;
+            viewYear = (this.model.state.lastClickedYearInMultiSelectMode !== 0) ? this.model.state.lastClickedYearInMultiSelectMode : this.model.state.view.year;
+        }else{
+            viewMonth = this.model.state.view.month;
+            viewYear = this.model.state.view.year;
+        }
         let pdateInstance = this.model.PersianDate.date(),
           daysCount = pdateInstance.daysInMonth(viewYear, viewMonth),
           firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1,
@@ -358,6 +367,7 @@ class View {
                     dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
                     dataUnix: calcedDate.hour(12).valueOf(),
                     otherMonth: otherMonth,
+                    selected: this.isInSelectedDays(calcedDate.hour(12).valueOf()),
                     // TODO: make configurable
                     enabled: this.checkDayAccess(calcedDate.valueOf())
                 });
@@ -371,20 +381,14 @@ class View {
     }
 
     markSelectedDay (unixDate = -1) {
-        console.log('unixDate');
-        console.log(unixDate);
-        console.log('this.$container');
-        console.log(this.$container);
-        console.log('this.$container.find("td[data-unix^=\'"+unixDate+"\']")');
-        console.log(this.$container.find("td[data-unix^='"+unixDate+"']"));
-        console.log($("td[data-unix^='"+unixDate+"']"));
-        if (this.model.options.multiSelect && unixDate !== -1) {
-            let td = this.$container.find("td[data-unix^='"+unixDate+"']");
-
-            if (this.isInSelectedDays(unixDate)) {
-                $(td[0]).removeClass('selected');
-            } else {
-                $(td[0]).addClass('selected');
+        if (this.model.options.multiSelect) {
+            if (unixDate !== -1){
+                let td = this.$container.find("td[data-unix^='"+unixDate+"']");
+                if (this.isInSelectedDays(unixDate)) {
+                    $(td[0]).removeClass('selected');
+                } else {
+                    $(td[0]).addClass('selected');
+                }
             }
         } else {
             const selected = this.model.state.selected;
@@ -517,7 +521,8 @@ class View {
     getViewModel (data) {
         const anotherCalendar = this._getAnotherCalendar();
         return {
-            plotId: '',
+            plotId: 'plotId' + this.model.view.id,
+            Id: this.model.view.id,
             navigator: {
                 enabled: this.model.options.navigator.enabled,
                 switch: {
@@ -616,6 +621,10 @@ class View {
         if (this.model.navigator) {
             this.model.navigator.liveAttach();
         }
+        let width = this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').width();
+        this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('height', width + 'px');
+        this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('line-height', width + 'px');
+        this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('border-radius', '50%');
     }
 }
 
