@@ -324,11 +324,7 @@ class Input {
     _initPersianDate(inputValue){
         let parse = new PersianDateParser();
         if (this.model.options.multiSelect){
-            let dates = inputValue.split('|');
-            for (let index = 0; index < dates.length; index++){
-                let pd = new persianDate(parse.parse(dates[index])).valueOf();
-            }
-            return null;
+            return inputValue;
         }else{
             let pd = new persianDate(parse.parse(inputValue)).valueOf();
             return new Date(pd).valueOf();
@@ -337,11 +333,7 @@ class Input {
 
     _initGregorianDate(inputValue){
         if (this.model.options.multiSelect){
-            let dates = inputValue.split('|');
-            for (let index = 0; index < dates.length; index++){
-                console.log(dates[index]);
-            }
-            return null;
+            return inputValue;
         }else{
             return new Date(inputValue).valueOf();
         }
