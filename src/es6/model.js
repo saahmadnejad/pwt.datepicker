@@ -89,11 +89,12 @@ class Model {
             this.input.updateForMultiSelectMode(unixTime);
         };
 
-        this.state.setViewDateTime('unix', this.input.getOnInitState());
+        let initState = this.input.getOnInitState();
+        this.state.setViewDateTime('unix', initState);
         if (this.options.multiSelect){
-            this.state.setSelectedDateTimeInMultiSelectMode('unix', this.input.getOnInitState());
+            this.state.setSelectedDateTimeInMultiSelectMode('unix', initState);
         }else{
-            this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+            this.state.setSelectedDateTime('unix', initState);
         }
         this.view.render();
 

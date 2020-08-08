@@ -286,6 +286,19 @@ class State {
     }
 
     setSelectedDateTimeInMultiSelectMode(key, value){
+        if (typeof value === 'string' || value instanceof String){
+            let dates = value.split('|');
+            for(let index = 0; index < dates.length; index++){
+                value = dates[index] * 1000;
+                this._setSelectedDatetimeForOneDateInMultiSelectMode(key, value);
+            }
+        }else {
+            this._setSelectedDatetimeForOneDateInMultiSelectMode(key, value);
+        }
+        return this;
+    }
+
+    _setSelectedDatetimeForOneDateInMultiSelectMode(key, value){
         switch (key) {
             case 'unix':
                 let pd = this.model.PersianDate.date(value);
@@ -313,7 +326,6 @@ class State {
         }
         this._updateSelectedDateObject();
         this._updateSelectedUnixForMultiSelectMode(value);
-        return this;
     }
 
     removeSelectedDateTimeFromMultiSelectMode(key, value) {

@@ -214,6 +214,21 @@
         <div class="col-xs-12 col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading">
+              <h3 class="panel-title">Persian Inline in multiselect mode</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <input id="inline_multiselect_alt" class="form-control" disabled/>
+                <br/>
+                <div id="inline_multiselect" data-date='1596612600|1596526200|1596439800|1596353400'></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
               <h3 class="panel-title">Persian Inline With Custom Weekdays and multiselect</h3>
             </div>
             <div class="panel-body">
@@ -489,6 +504,65 @@
             altField: '#custom_weekdays_inline_multiselect_alt',
             altFormat: 'X',
             inline: true,
+            viewMode: 'day',
+            format: "X",
+            customWeekdays:{
+                mode: 'extended',
+            },
+            theme: {
+                plotArea: {
+                    backgroundColor: 'transparent',
+                    boxShadow: 'none',
+                    border: 'none',
+                },
+                dayCell: {
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    backgroundColor: 'white',
+                    borderColor: 'white',
+                    borderWidth: '1',
+                    fontColor: '#1c1b19',
+                    otherMonthFontColor: '#74909b',
+                    disableFontColor: '#ccc',
+                    shape: 'circle', // circle, cube, rectangle
+                    hover: {
+                        fontColor: '#1c1b19',
+                        borderWidth: '1',
+                        borderStyle: 'solid',
+                        backgroundColor: '#c8e6ff',
+                        borderColor: '#1373eb',
+                        fontWeight: 'bold',
+                    },
+                },
+                monthCell: {
+                    backgroundColor: '#c8e6ff',
+                },
+                yearCell: {
+                    backgroundColor: '#c8e6ff',
+                },
+                weekday: {
+                    fontColor: '#3e4f59',
+                    fontWeight: 'normal',
+                    fontSize: '10px',
+                },
+            },
+            multiSelect: true,
+        });
+
+        $("#inline_multiselect").persianDatepicker({
+            calendar: {
+                persian: {
+                    enabled: true,
+                    locale: 'fa',
+                    showHint: true,
+                    leapYearMode: "astronomical" // "astronomical"
+                }
+            },
+            altField: '#inline_multiselect_alt',
+            altFormat: 'X',
+            inline: true,
+            initialValue: true,
+            initialValueType: 'unix',
             viewMode: 'day',
             format: "X",
             customWeekdays:{

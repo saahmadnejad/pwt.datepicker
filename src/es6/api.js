@@ -98,9 +98,15 @@ class API {
      * pd.setDate(1382276091100)
      */
     setDate (unix) {
-        this.model.state.setSelectedDateTime('unix', unix);
-        this.model.state.setViewDateTime('unix', unix);
-        this.model.state.setSelectedDateTime('unix', unix);
+        if (this.model.options.multiSelect){
+            this.model.state.setSelectedDateTimeInMultiSelectMode('unix', unix);
+            this.model.state.setViewDateTime('unix', unix);
+            this.model.state.setSelectedDateTimeInMultiSelectMode('unix', unix);
+        }else{
+            this.model.state.setSelectedDateTime('unix', unix);
+            this.model.state.setViewDateTime('unix', unix);
+            this.model.state.setSelectedDateTime('unix', unix);
+        }
         this.model.view.render(this.view);
         this.model.options.onSet(unix);
         return this.model;

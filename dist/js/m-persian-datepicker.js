@@ -1,10 +1,3 @@
-/*
-** m-persian-datepicker - v1.3.84
-** Reza Babakhani <babakhani.reza@gmail.com>, Seyed Ali Ahmadnejad <sa.ahmadnejad@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under MIT license 
-*/ 
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -274,11 +267,12 @@ var Model = function () {
         this.input.updateForMultiSelectMode(unixTime);
       };
 
-      this.state.setViewDateTime('unix', this.input.getOnInitState());
+      var initState = this.input.getOnInitState();
+      this.state.setViewDateTime('unix', initState);
       if (this.options.multiSelect) {
-        this.state.setSelectedDateTimeInMultiSelectMode('unix', this.input.getOnInitState());
+        this.state.setSelectedDateTimeInMultiSelectMode('unix', initState);
       } else {
-        this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+        this.state.setSelectedDateTime('unix', initState);
       }
       this.view.render();
 
@@ -1675,7 +1669,10 @@ var Input = function () {
             var value = this.model.options.altFieldFormatter(unix);
             var str = $(this.model.options.altField).val();
             if (str.indexOf(value) >= 0) {
-                if (str.indexOf('|' + value) >= 0) {
+                if (str.indexOf(value + '|') >= 0) {
+                    str = str.replace(value + '|', '');
+                    $(this.model.options.altField).val(str);
+                } else if (str.indexOf('|' + value) >= 0) {
                     str = str.replace('|' + value, '');
                     $(this.model.options.altField).val(str);
                 } else {
@@ -1683,7 +1680,8 @@ var Input = function () {
                     $(this.model.options.altField).val(str);
                 }
             } else {
-                $(this.model.options.altField).val($(this.model.options.altField).val() + '|' + value);
+                var val = $(this.model.options.altField).val();
+                if (val) $(this.model.options.altField).val(val + '|' + value);else $(this.model.options.altField).val(value);
             }
         }
 
@@ -1708,7 +1706,10 @@ var Input = function () {
             var value = this.model.options.formatter(unix);
             var str = $(this.elem).val();
             if (str.indexOf(value) >= 0) {
-                if (str.indexOf('|' + value) >= 0) {
+                if (str.indexOf(value + '|') >= 0) {
+                    str = str.replace(value + '|', '');
+                    $(this.elem).val(str);
+                } else if (str.indexOf('|' + value) >= 0) {
                     str = str.replace('|' + value, '');
                     $(this.elem).val(str);
                 } else {
@@ -1716,7 +1717,12 @@ var Input = function () {
                     $(this.elem).val(str);
                 }
             } else {
-                $(this.elem).val($(this.elem).val() + '|' + value);
+                var val = $(this.elem).val();
+                if (val) {
+                    $(this.elem).val(val + '|' + value);
+                } else {
+                    $(this.elem).val(val);
+                }
             }
         }
 
@@ -1750,7 +1756,7 @@ var Input = function () {
         key: 'getOnInitState',
         value: function getOnInitState() {
             var persianDatePickerTimeRegex = '^([0-1][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9]))?$';
-            var garegurianDate = null,
+            var gregorianDate = null,
                 $inputElem = $(this.elem),
                 inputValue = void 0;
 
@@ -1776,16 +1782,14 @@ var Input = function () {
                 this.initialUnix = tempDate.valueOf();
             } else {
                 if (this.model.options.initialValueType === 'persian' && inputValue) {
-                    var parse = new PersianDateParser();
-                    var pd = new persianDate(parse.parse(inputValue)).valueOf();
-                    garegurianDate = new Date(pd).valueOf();
+                    gregorianDate = this._initPersianDate(inputValue);
                 } else if (this.model.options.initialValueType === 'unix' && inputValue) {
-                    garegurianDate = parseInt(inputValue);
+                    gregorianDate = this._initUnixDate(inputValue);
                 } else if (inputValue) {
-                    garegurianDate = new Date(inputValue).valueOf();
+                    gregorianDate = this._initGregorianDate(inputValue);
                 }
-                if (garegurianDate && garegurianDate != 'undefined') {
-                    this.initialUnix = garegurianDate;
+                if (gregorianDate && gregorianDate != 'undefined') {
+                    this.initialUnix = gregorianDate;
                 } else {
                     var d = new Date();
                     d.setHours(12);
@@ -1796,6 +1800,46 @@ var Input = function () {
                 }
             }
             return this.initialUnix;
+        }
+    }, {
+        key: '_initPersianDate',
+        value: function _initPersianDate(inputValue) {
+            var parse = new PersianDateParser();
+            if (this.model.options.multiSelect) {
+                var dates = inputValue.split('|');
+                for (var index = 0; index < dates.length; index++) {
+                    var pd = new persianDate(parse.parse(dates[index])).valueOf();
+                }
+                return null;
+            } else {
+                var _pd = new persianDate(parse.parse(inputValue)).valueOf();
+                return new Date(_pd).valueOf();
+            }
+        }
+    }, {
+        key: '_initGregorianDate',
+        value: function _initGregorianDate(inputValue) {
+            if (this.model.options.multiSelect) {
+                var dates = inputValue.split('|');
+                for (var index = 0; index < dates.length; index++) {
+                    console.log(dates[index]);
+                }
+                return null;
+            } else {
+                return new Date(inputValue).valueOf();
+            }
+        }
+    }, {
+        key: '_initUnixDate',
+        value: function _initUnixDate(inputValue) {
+            if (this.model.options.multiSelect) {
+                if (this.model.state.selectedInMultiSelectMode.length > 0) {
+                    return null;
+                }
+                return inputValue;
+            } else {
+                return parseInt(inputValue);
+            }
         }
     }]);
 
@@ -2629,6 +2673,20 @@ var State = function () {
     }, {
         key: 'setSelectedDateTimeInMultiSelectMode',
         value: function setSelectedDateTimeInMultiSelectMode(key, value) {
+            if (typeof value === 'string' || value instanceof String) {
+                var dates = value.split('|');
+                for (var index = 0; index < dates.length; index++) {
+                    value = dates[index] * 1000;
+                    this._setSelectedDatetimeForOneDateInMultiSelectMode(key, value);
+                }
+            } else {
+                this._setSelectedDatetimeForOneDateInMultiSelectMode(key, value);
+            }
+            return this;
+        }
+    }, {
+        key: '_setSelectedDatetimeForOneDateInMultiSelectMode',
+        value: function _setSelectedDatetimeForOneDateInMultiSelectMode(key, value) {
             switch (key) {
                 case 'unix':
                     var pd = this.model.PersianDate.date(value);
@@ -2656,7 +2714,6 @@ var State = function () {
             }
             this._updateSelectedDateObject();
             this._updateSelectedUnixForMultiSelectMode(value);
-            return this;
         }
     }, {
         key: 'removeSelectedDateTimeFromMultiSelectMode',
@@ -3293,13 +3350,9 @@ var View = function () {
                 viewYear = void 0;
             //log('if you see this many time your code has performance issue');
 
-            if (false) {
-                viewMonth = this.model.state.lastClickedMonthInMultiSelectMode !== 0 ? this.model.state.lastClickedMonthInMultiSelectMode : this.model.state.view.month;
-                viewYear = this.model.state.lastClickedYearInMultiSelectMode !== 0 ? this.model.state.lastClickedYearInMultiSelectMode : this.model.state.view.year;
-            } else {
-                viewMonth = this.model.state.view.month;
-                viewYear = this.model.state.view.year;
-            }
+            viewMonth = this.model.state.view.month;
+            viewYear = this.model.state.view.year;
+
             var pdateInstance = this.model.PersianDate.date(),
                 daysCount = pdateInstance.daysInMonth(viewYear, viewMonth),
                 firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1,
@@ -3398,7 +3451,7 @@ var View = function () {
 
             if (this.model.options.multiSelect) {
                 if (unixDate !== -1) {
-                    var td = this.$container.find("td[data-unix^='" + unixDate + "']");
+                    var td = this.$container.find('td[data-unix^="' + unixDate + '"]');
                     if (this.isInSelectedDays(unixDate)) {
                         $(td[0]).removeClass('selected');
                     } else {
@@ -3421,7 +3474,7 @@ var View = function () {
         value: function isInSelectedDays(value) {
             var selected = this.model.state.selectedInMultiSelectMode;
             var found = false;
-            selected.forEach(function (obj, index) {
+            selected.forEach(function (obj) {
                 if (found) return true;
                 if (obj.unixDate === value) {
                     found = true;

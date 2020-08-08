@@ -191,7 +191,10 @@ class Input {
         let value = this.model.options.altFieldFormatter(unix);
         let str = $(this.model.options.altField).val();
         if (str.indexOf(value) >= 0){
-            if (str.indexOf('|'+value) >= 0){
+            if (str.indexOf(value + '|') >= 0){
+                str = str.replace(value + '|', '');
+                $(this.model.options.altField).val(str);
+            }else if (str.indexOf('|' + value) >= 0){
                 str = str.replace('|' + value, '');
                 $(this.model.options.altField).val(str);
             }else{
@@ -199,7 +202,11 @@ class Input {
                 $(this.model.options.altField).val(str);
             }
         }else{
-            $(this.model.options.altField).val($(this.model.options.altField).val() + '|' + value);
+            let val = $(this.model.options.altField).val();
+            if (val)
+                $(this.model.options.altField).val(val + '|' + value);
+            else
+                $(this.model.options.altField).val(value);
         }
     }
 
@@ -220,7 +227,10 @@ class Input {
         let value = this.model.options.formatter(unix);
         let str = $(this.elem).val();
         if (str.indexOf(value) >= 0){
-            if (str.indexOf('|'+value) >= 0){
+            if (str.indexOf(value + '|') >= 0){
+                str = str.replace(value + '|', '');
+                $(this.elem).val(str);
+            }else if(str.indexOf('|' + value) >= 0){
                 str = str.replace('|' + value, '');
                 $(this.elem).val(str);
             }else{
@@ -228,7 +238,12 @@ class Input {
                 $(this.elem).val(str);
             }
         }else{
-            $(this.elem).val($(this.elem).val() + '|' + value);
+            let val = $(this.elem).val();
+            if (val){
+                $(this.elem).val(val + '|' + value);
+            }else{
+                $(this.elem).val(val);
+            }
         }
     }
 
@@ -258,7 +273,7 @@ class Input {
      */
     getOnInitState() {
         const persianDatePickerTimeRegex = '^([0-1][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9]))?$';
-        let garegurianDate = null,
+        let gregorianDate = null,
             $inputElem = $(this.elem),
             inputValue;
 
@@ -286,18 +301,15 @@ class Input {
         }
         else {
             if (this.model.options.initialValueType === 'persian' && inputValue) {
-                let parse = new PersianDateParser();
-                let pd = new persianDate(parse.parse(inputValue)).valueOf();
-                garegurianDate = new Date(pd).valueOf();
+                gregorianDate = this._initPersianDate(inputValue);
             } else if (this.model.options.initialValueType === 'unix' && inputValue) {
-                garegurianDate = parseInt(inputValue);
+                gregorianDate = this._initUnixDate(inputValue);
             } else if (inputValue) {
-                garegurianDate = new Date(inputValue).valueOf();
+                gregorianDate = this._initGregorianDate(inputValue);
             }
-            if (garegurianDate && garegurianDate != 'undefined') {
-                this.initialUnix = garegurianDate;
-            }
-            else {
+            if (gregorianDate && gregorianDate != 'undefined') {
+                this.initialUnix = gregorianDate;
+            } else {
                 let d = new Date();
                 d.setHours(12);
                 d.setMinutes(0);
@@ -307,6 +319,43 @@ class Input {
             }
         }
         return this.initialUnix;
+    }
+
+    _initPersianDate(inputValue){
+        let parse = new PersianDateParser();
+        if (this.model.options.multiSelect){
+            let dates = inputValue.split('|');
+            for (let index = 0; index < dates.length; index++){
+                let pd = new persianDate(parse.parse(dates[index])).valueOf();
+            }
+            return null;
+        }else{
+            let pd = new persianDate(parse.parse(inputValue)).valueOf();
+            return new Date(pd).valueOf();
+        }
+    }
+
+    _initGregorianDate(inputValue){
+        if (this.model.options.multiSelect){
+            let dates = inputValue.split('|');
+            for (let index = 0; index < dates.length; index++){
+                console.log(dates[index]);
+            }
+            return null;
+        }else{
+            return new Date(inputValue).valueOf();
+        }
+    }
+
+    _initUnixDate(inputValue){
+        if (this.model.options.multiSelect){
+            if (this.model.state.selectedInMultiSelectMode.length > 0) {
+                return null;
+            }
+            return inputValue;
+        }else{
+            return parseInt(inputValue);
+        }
     }
 
 }
