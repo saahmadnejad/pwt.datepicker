@@ -1,6 +1,6 @@
 {
   "name": "m-persian-datepicker",
-  "version": "1.4.1",
+  "version": "1.4.11",
   "main": "dist/js/m-persian-datepicker.js",
   "description": "Another custom jQuery datepicker plugin work with Iranian calendar. (Jalali)",
   "keywords": [
