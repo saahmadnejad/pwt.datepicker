@@ -404,9 +404,15 @@ var API = function () {
     }, {
         key: 'setDate',
         value: function setDate(unix) {
-            this.model.state.setSelectedDateTime('unix', unix);
-            this.model.state.setViewDateTime('unix', unix);
-            this.model.state.setSelectedDateTime('unix', unix);
+            if (this.model.options.multiSelect) {
+                this.model.state.setSelectedDateTimeInMultiSelectMode('unix', unix);
+                this.model.state.setViewDateTime('unix', unix);
+                this.model.state.setSelectedDateTimeInMultiSelectMode('unix', unix);
+            } else {
+                this.model.state.setSelectedDateTime('unix', unix);
+                this.model.state.setViewDateTime('unix', unix);
+                this.model.state.setSelectedDateTime('unix', unix);
+            }
             this.model.view.render(this.view);
             this.model.options.onSet(unix);
             return this.model;
@@ -1806,25 +1812,17 @@ var Input = function () {
         value: function _initPersianDate(inputValue) {
             var parse = new PersianDateParser();
             if (this.model.options.multiSelect) {
-                var dates = inputValue.split('|');
-                for (var index = 0; index < dates.length; index++) {
-                    var pd = new persianDate(parse.parse(dates[index])).valueOf();
-                }
-                return null;
+                return inputValue;
             } else {
-                var _pd = new persianDate(parse.parse(inputValue)).valueOf();
-                return new Date(_pd).valueOf();
+                var pd = new persianDate(parse.parse(inputValue)).valueOf();
+                return new Date(pd).valueOf();
             }
         }
     }, {
         key: '_initGregorianDate',
         value: function _initGregorianDate(inputValue) {
             if (this.model.options.multiSelect) {
-                var dates = inputValue.split('|');
-                for (var index = 0; index < dates.length; index++) {
-                    console.log(dates[index]);
-                }
-                return null;
+                return inputValue;
             } else {
                 return new Date(inputValue).valueOf();
             }
@@ -2017,11 +2015,9 @@ var Navigator = function () {
             if (this.model.options.dayPicker.enabled) {
 
                 $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td:not(.disabled)', function () {
-                    var selected = $(this).hasClass('selected');
-
                     var thisUnix = $(this).data('unix');
 
-                    //TODO must be checked
+                    var selected = $(this).hasClass('selected');
 
                     if (!that.model.options.multiSelect) {
                         that.model.state.setSelectedDateTime('unix', thisUnix);
@@ -3401,7 +3397,7 @@ var View = function () {
                                 title: calcedDate.format('D'),
                                 alterCalTitle: new persianDate(calcedDate.valueOf()).toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('D'),
                                 dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
-                                dataUnix: calcedDate.hour(12).valueOf(),
+                                dataUnix: calcedDate.hour(12).minute(0).second(0).millisecond(0).valueOf(),
                                 otherMonth: otherMonth,
                                 selected: this.isInSelectedDays(calcedDate.hour(12).valueOf()),
                                 // TODO: make configurable
@@ -3481,6 +3477,13 @@ var View = function () {
                 }
             });
             return found;
+        }
+    }, {
+        key: 'isSelected',
+        value: function isSelected(value) {
+            var selected = this.model.state.selected;
+            if (selected.unixDate === value) return true;
+            return false;
         }
     }, {
         key: 'markToday',

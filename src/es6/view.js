@@ -361,7 +361,7 @@ class View {
                     title: calcedDate.format('D'),
                     alterCalTitle: new persianDate(calcedDate.valueOf()).toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('D'),
                     dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
-                    dataUnix: calcedDate.hour(12).valueOf(),
+                    dataUnix: calcedDate.hour(12).minute(0).second(0).millisecond(0).valueOf(),
                     otherMonth: otherMonth,
                     selected: this.isInSelectedDays(calcedDate.hour(12).valueOf()),
                     // TODO: make configurable
@@ -408,6 +408,13 @@ class View {
             }
         });
         return found;
+    }
+
+    isSelected (value) {
+        const selected = this.model.state.selected;
+        if (selected.unixDate === value)
+            return true;
+        return false;
     }
 
     markToday () {

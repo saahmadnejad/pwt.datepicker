@@ -139,11 +139,9 @@ class Navigator {
         if (this.model.options.dayPicker.enabled) {
 
             $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td:not(.disabled)', function () {
-                let selected = $(this).hasClass('selected');
-
                 let thisUnix = $(this).data('unix');
 
-                //TODO must be checked
+                let selected = $(this).hasClass('selected');
 
                 if(!that.model.options.multiSelect) {
                     that.model.state.setSelectedDateTime('unix', thisUnix);
