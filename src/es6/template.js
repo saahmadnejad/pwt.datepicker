@@ -30,6 +30,7 @@ const Template = `
 }
 #{{Id}} .datepicker-plot-area .datepicker-day-view .table-days td span.other-month{
   color: {{theme.values.dayCell.otherMonthFontColor}};
+  background-color: {{theme.values.dayCell.otherMonthBackgroundColor}};
 }
 #{{Id}} .datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row-cell{
   color: {{theme.values.weekday.fontColor}};
