@@ -1,5 +1,5 @@
 /*
-** m-persian-datepicker - v1.4.1
+** m-persian-datepicker - v1.4.11
 ** Reza Babakhani <babakhani.reza@gmail.com>, Seyed Ali Ahmadnejad <sa.ahmadnejad@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
 ** Under MIT license 
@@ -3713,10 +3713,7 @@ var View = function () {
             if (this.model.navigator) {
                 this.model.navigator.liveAttach();
             }
-            var width = this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').width();
-            this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('height', width + 'px');
-            this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('line-height', width + 'px');
-            this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('border-radius', '50%');
+            if (this.model.options.theme && this.model.options.theme.dayCell && this.model.options.theme.dayCell.shape === 'circle') this.$container.find('.datepicker-plot-area .datepicker-day-view .table-days td span').css('border-radius', '50%');
         }
     }]);
 
