@@ -1,8 +1,8 @@
 {
   "name": "m-persian-datepicker",
-  "version": "1.4.15",
+  "version": "1.4.16",
   "main": "dist/js/m-persian-datepicker.js",
-  "description": "Another custom jQuery datepicker plugin work with Iranian calendar. (Jalali)",
+  "description": "jQuery datepicker plugin work with Iranian calendar. (Jalali)",
   "keywords": [
     "jquery-plugin",
     "m-persian-datepicker",
@@ -29,9 +29,6 @@
   },
   "repository": "https://github.com/saahmadnejad/pwt.datepicker.git",
   "homepage": "http://babakhani.github.io/PersianWebToolkit/docs/datepicker",
-  "bugs": {
-    "url": "https://github.com/saahmadnejad/pwt.datepicker/issues"
-  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
