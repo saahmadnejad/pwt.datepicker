@@ -287,7 +287,7 @@ class Input {
         }
 
         // Check time string by regex
-        if (inputValue && inputValue.match(persianDatePickerTimeRegex)) {
+        if (inputValue && inputValue.toString().match(persianDatePickerTimeRegex)) {
             let timeArray = inputValue.split(':'),
                 tempDate = new Date();
             tempDate.setHours(timeArray[0]);
