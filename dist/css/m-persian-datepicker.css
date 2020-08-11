@@ -1,5 +1,5 @@
 /*
-** m-persian-datepicker - v1.4.14
+** m-persian-datepicker - v1.4.15
 ** Reza Babakhani <babakhani.reza@gmail.com>, Seyed Ali Ahmadnejad <sa.ahmadnejad@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
 ** Under MIT license 
