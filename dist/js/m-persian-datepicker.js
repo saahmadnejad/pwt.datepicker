@@ -1,5 +1,5 @@
 /*
-** m-persian-datepicker - v1.4.11
+** m-persian-datepicker - v1.4.14
 ** Reza Babakhani <babakhani.reza@gmail.com>, Seyed Ali Ahmadnejad <sa.ahmadnejad@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
 ** Under MIT license 
@@ -1782,7 +1782,7 @@ var Input = function () {
             }
 
             // Check time string by regex
-            if (inputValue && inputValue.match(persianDatePickerTimeRegex)) {
+            if (inputValue && inputValue.toString().match(persianDatePickerTimeRegex)) {
                 var timeArray = inputValue.split(':'),
                     tempDate = new Date();
                 tempDate.setHours(timeArray[0]);
